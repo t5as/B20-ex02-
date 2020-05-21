@@ -8,7 +8,7 @@ namespace B20_Ex02
     { 
         static void Main()
         {
-
+            int x = 0;
         }
     }
 }
