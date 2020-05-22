@@ -8,7 +8,8 @@ namespace B20_Ex02
     { 
         static void Main()
         {
-            int x = 0;
+            BoardLogic br = new BoardLogic(4, 5);
+            br.CreateBoard();
         }
     }
 }
