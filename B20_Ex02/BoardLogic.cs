@@ -15,7 +15,7 @@ namespace B20_Ex02
             m_boardWidth = i_boardWidth;
         } 
 
-        public void CreateBoard()
+        public void createBoard()
         {
             char columnLetter = 'A';
             for (byte i = 0; i <= m_boardHeight; i++)
@@ -49,7 +49,12 @@ namespace B20_Ex02
                 }
                 Console.WriteLine(boardRecords);
                 Console.WriteLine(boardBorders);
-            }
+            } 
+        }
+
+        public void updateBoard(byte i_rowIndex, byte i_colIndex)
+        {
+
         }
     }
 }

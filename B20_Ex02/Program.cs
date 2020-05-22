@@ -9,7 +9,8 @@ namespace B20_Ex02
         static void Main()
         {
             BoardLogic br = new BoardLogic(4, 5);
-            br.CreateBoard();
+            br.createBoard();
+            Identifier.shalom();
         }
     }
 }
