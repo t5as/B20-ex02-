@@ -11,6 +11,15 @@ namespace B20_Ex02
             BoardLogic br = new BoardLogic(4, 5);
             br.createBoard();
             Identifier.shalom();
+            GameDataMatrix gdm = new GameDataMatrix(4, 5);
+            char[,] mat = gdm.getDataMatrix; 
+            for(int i = 0; i < 4; i++)
+            {
+                for(int j = 0; j < 5; j++)
+                {
+                    Console.WriteLine(mat[i, j]);
+                }
+            }
         }
     }
 }
