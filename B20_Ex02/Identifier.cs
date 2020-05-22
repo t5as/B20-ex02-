@@ -4,17 +4,35 @@ namespace B20_Ex02
 {
     public class Identifier
     {
-        public static void startGame()
+        public static byte[] StartGame()
         {
+            string firstPlayer = InitializePlayer();
+            byte gameType = InitializeGameType();
 
-            string firstPlayer = GetInputName();
-            bool firstPlayerValid = IsValidName(firstPlayer);
-            while (!firstPlayerValid)
+            if (gameType == 2)
             {
-                firstPlayer = GetInputName();
-                firstPlayerValid = IsValidName(firstPlayer);
+                string secondPlayer = InitializePlayer();
             }
 
+            byte[] dimensions = InitializeBoardDimensions();
+            return dimensions;
+        }
+
+        public static string InitializePlayer()
+        {
+            string player = GetInputName();
+            bool playerValid = IsValidName(player);
+            while (!playerValid)
+            {
+                player = GetInputName();
+                playerValid = IsValidName(player);
+            }
+
+            return player;
+        }
+
+        public static byte InitializeGameType()
+        {
             string gameType = GetGameType();
             byte byteGameType = IsValidGameType(gameType);
             while (byteGameType == 0)
@@ -23,23 +41,18 @@ namespace B20_Ex02
                 byteGameType = IsValidGameType(gameType);
             }
 
-            if (byteGameType == 2)
-            {
-                string secondPlayer = GetInputName();
-                bool secondPlayerValid = IsValidName(secondPlayer);
-                while (!secondPlayerValid)
-                {
-                    secondPlayer = GetInputName();
-                    secondPlayerValid = IsValidName(secondPlayer);
-                }
-            }
+            return byteGameType;
+        }
 
+        public static byte[] InitializeBoardDimensions()
+        {
+            byte byteBoardHeight = 0;
+            byte byteBoardWidth = 0;
             bool cellNumberEven = false;
             while (!cellNumberEven)
             {
-
                 string boardHeight = GetBoardHeight();
-                byte byteBoardHeight = IsDimensionValid(boardHeight);
+                byteBoardHeight = IsDimensionValid(boardHeight);
                 while (byteBoardHeight == 0)
                 {
                     boardHeight = GetBoardHeight();
@@ -47,7 +60,7 @@ namespace B20_Ex02
                 }
 
                 string boardWidth = GetBoardWidth();
-                byte byteBoardWidth = IsDimensionValid(boardWidth);
+                byteBoardWidth = IsDimensionValid(boardWidth);
                 while (byteBoardWidth == 0)
                 {
                     boardWidth = GetBoardHeight();
@@ -56,8 +69,10 @@ namespace B20_Ex02
 
                 cellNumberEven = IsCellNumberEven(byteBoardHeight, byteBoardWidth);
             }
-        }
 
+            byte[] dimensions = { byteBoardHeight, byteBoardWidth };
+            return dimensions;
+        }
 
         public static string GetInputName()
         {
@@ -96,14 +111,13 @@ namespace B20_Ex02
                     Console.WriteLine("Invalid name - Name should contain only English letters");
                     return !validName;
                 }
+                
                 if (!char.IsLower(i_StrInputName[i]))
                 {
                     Console.WriteLine(
                         "Invalid name - Name should start in a capital English letter, followed by lower English letter");
                     return !validName;
                 }
-
-
             }
 
             return validName;
@@ -120,19 +134,19 @@ namespace B20_Ex02
 
         public static byte IsValidGameType(string i_GameType)
         {
-
             if (i_GameType.Length != 1)
             {
                 Console.WriteLine("Invalid game type, please try again");
                 return 0;
             }
+
             if (i_GameType != "1" && i_GameType != "2")
             {
                 Console.WriteLine("Invalid game type, please try again");
                 return 0;
             }
 
-            return Byte.Parse(i_GameType);
+            return byte.Parse(i_GameType);
         }
 
         public static string GetBoardHeight()
@@ -165,7 +179,7 @@ namespace B20_Ex02
                 return 0;
             }
 
-            byte byteDimension = Byte.Parse(i_Dimension);
+            byte byteDimension = byte.Parse(i_Dimension);
 
             if (byteDimension < 4 || byteDimension > 6)
             {
@@ -180,7 +194,7 @@ namespace B20_Ex02
         {
             bool cellNumberEven = true;
 
-            if (i_Height * i_Width % 2 != 0)
+            if (((i_Height * i_Width) % 2) != 0)
             {
                 Console.WriteLine("The board contains odd number of cells - Please choose height and width again");
                 return !cellNumberEven;

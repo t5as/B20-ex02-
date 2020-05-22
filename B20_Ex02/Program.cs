@@ -8,10 +8,11 @@ namespace B20_Ex02
     { 
         static void Main()
         {
-            BoardLogic br = new BoardLogic(4, 5);
+            byte[] boardDimensions = Identifier.StartGame();
+            BoardLogic br = new BoardLogic(boardDimensions[0], boardDimensions[1]);
             br.createBoard();
-            Identifier.shalom();
-            GameDataMatrix gdm = new GameDataMatrix(4, 5);
+            
+            GameDataMatrix gdm = new GameDataMatrix(boardDimensions[0], boardDimensions[1]);
             char[,] mat = gdm.getDataMatrix; 
             for(int i = 0; i < 4; i++)
             {

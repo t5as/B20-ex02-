@@ -21,7 +21,7 @@ namespace B20_Ex02
             m_randomLetters = new char[(m_rowsCount * m_columnsCount) / 2];
         }  
 
-        public char[, ] getDataMatrix
+        public char[,] getDataMatrix
         {
             get
             {
@@ -58,6 +58,7 @@ namespace B20_Ex02
                 {
                     letter = getRandomLetter();
                 }
+
                 m_randomLetters[i] = letter;
             }
         } 
@@ -73,16 +74,11 @@ namespace B20_Ex02
                     {
                         randomLetterPlace = rand.Next(0, m_randomLetters.Length - 1);
                     }
+
                     m_dataMatrix[i, j] = m_randomLetters[randomLetterPlace];
                     m_timesPlacedLetter[randomLetterPlace]++;
                 }
             }
-        } 
-
-      
-
-
-
-
+        }
     }
 }
