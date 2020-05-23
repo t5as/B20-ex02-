@@ -13,13 +13,15 @@ namespace B20_Ex02
             br.createBoard();
             
             GameDataMatrix gdm = new GameDataMatrix(boardDimensions[0], boardDimensions[1]);
-            char[,] mat = gdm.getDataMatrix; 
-            for(int i = 0; i < 4; i++)
+            gdm.setDataMatrix();
+            char[,] mat = gdm.getDataMatrix;           
+            for(int i = 0; i < boardDimensions[0]; i++)
             {
-                for(int j = 0; j < 5; j++)
+                for(int j = 0; j < boardDimensions[1]; j++)
                 {
-                    Console.WriteLine(mat[i, j]);
+                    Console.Write(mat[i, j]);
                 }
+                Console.WriteLine();
             }
         }
     }
