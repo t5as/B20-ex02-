@@ -17,8 +17,38 @@ namespace B20_Ex02
             {
                 Utils.secondPlayer = InitializePlayer("second player");
             }
+            else
+            {
+                Utils.secondPlayer = "Computer";
+            }
 
             InitializeBoardDimensions();
+            int turn = 0;
+            string currentPlayer;
+            while(turn < 10)
+            {
+                if((turn % 2) == 0)
+                {
+                    currentPlayer = Utils.firstPlayer;
+                }
+                else
+                {
+                    currentPlayer = Utils.secondPlayer;
+                }
+                
+                for (int i = 0; i < 2; i++)
+                {
+                    string move = GetCurrentMove(currentPlayer);
+                    bool moveValid = IsValidMove(move);
+                    while (!moveValid)
+                    {
+                        move = GetCurrentMove(currentPlayer);
+                        moveValid = IsValidMove(move);
+                    }
+                }
+
+                turn++;
+            }
         }
 
         public static string InitializePlayer(string io_playerNumber)
@@ -197,6 +227,62 @@ If you wish to play against a second player - press 2", Utils.firstPlayer));
             }
 
             return cellNumberEven;
+        }
+
+        public static string GetCurrentMove(string i_player)
+        {
+            Console.WriteLine(string.Format(@"Hello {0}, 
+Enter your next move ", i_player));
+            string currentMove = Console.ReadLine();
+
+            return currentMove;
+        }
+
+        public static bool IsValidMove(string i_move)
+        {
+            bool validMove = true;
+            
+            if (i_move.Length != 2)
+            {
+                Console.WriteLine("Invalid move length, please try again");
+                return !validMove;
+            }
+
+            if (!char.IsLetter(i_move[0]))
+            {
+                Console.WriteLine("There is no such column, please enter a valid board location");
+                return !validMove;
+            }
+
+            if (!char.IsDigit(i_move[1]))
+            {
+                Console.WriteLine("There is no such line, please enter a valid board location");
+                return !validMove;
+            }
+
+            int[] move = moveToInt(i_move);
+            int column = move[0] + 1;
+            int line = move[1] + 1;
+
+            if (column < 1 || column > Utils.boardWidth)
+            {
+                Console.WriteLine("There is no such column, please enter a valid board location");
+                return !validMove;
+            }
+
+            if (line < 1 || line > Utils.boardHeight)
+            {
+                Console.WriteLine("There is no such line, please enter a valid board location");
+                return !validMove;
+            }
+
+            return validMove;
+        }
+
+        public static int[] moveToInt(string i_move)
+        {
+            int[] move = { Utils.letterToIndex[i_move[0]], (int.Parse(i_move[1].ToString()) - 1)};
+            return move;
         }
     }
 }
