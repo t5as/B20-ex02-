@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BoardLogic.cs" />
+    <Compile Include="DrawBoard.cs" />
     <Compile Include="GameDataMatrix.cs" />
     <Compile Include="Identifier.cs" />
     <Compile Include="Program.cs" />
