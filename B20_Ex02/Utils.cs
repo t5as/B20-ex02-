@@ -4,11 +4,11 @@ using System.Text;
 
 namespace B20_Ex02
 {
-    class Utils
+    public class Utils
     {
-        private byte m_boardHeight;
-        private byte m_boardWidth;
-        private Dictionary<char, int> m_letterToIndex = new Dictionary<char, int>()
+        private static byte m_boardHeight;
+        private static byte m_boardWidth;
+        private static Dictionary<char, int> m_letterToIndex = new Dictionary<char, int>()
         {
             {'A', 0},
             {'B', 1},
@@ -18,29 +18,32 @@ namespace B20_Ex02
             {'F', 5}
         }; 
 
-        public Utils(byte i_boardHeight, byte i_boardWidth)
-        {
-            m_boardHeight = i_boardHeight;
-            m_boardWidth = i_boardWidth;
-        }
 
-        public byte getBoardHeight
+        public static byte boardHeight
         {
             get
             {
                 return m_boardHeight;
             }
+            set
+            {
+                m_boardHeight = value;
+            }
         }
 
-        public byte getBoardWidth
+        public static byte boardWidth
         {
             get
             {
                 return m_boardWidth;
             }
+            set
+            {
+                m_boardWidth = value;
+            }
         } 
 
-        public Dictionary<char, int> letterToIndex
+        public static Dictionary<char, int> letterToIndex
         {
             get
             {
