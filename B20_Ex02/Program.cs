@@ -8,16 +8,17 @@ namespace B20_Ex02
     { 
         static void Main()
         {
-            byte[] boardDimensions = Identifier.StartGame();
+            UI ui = new UI();
+            ui.StartGame();
             BoardLogic br = new BoardLogic();
             br.createBoard();
             
-            GameDataMatrix gdm = new GameDataMatrix(boardDimensions[0], boardDimensions[1]);
+            GameDataMatrix gdm = new GameDataMatrix(Utils.boardHeight, Utils.boardWidth);
             gdm.setDataMatrix();
             char[,] mat = gdm.getDataMatrix;           
-            for(int i = 0; i < boardDimensions[0]; i++)
+            for(int i = 0; i < Utils.boardHeight; i++)
             {
-                for(int j = 0; j < boardDimensions[1]; j++)
+                for(int j = 0; j < Utils.boardWidth; j++)
                 {
                     Console.Write(mat[i, j]);
                 }

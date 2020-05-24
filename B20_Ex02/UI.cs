@@ -4,34 +4,21 @@ namespace B20_Ex02
 {
     public class UI
     {
-        private string m_firstPlayer;
-        private string m_secondPlayer;
-        private byte m_gameType;
-        private byte m_boardHeight;
-        private byte m_boardWidth;
-
-        public UI(string i_firstPlayer, string i_secondPlayer, byte i_gameType, byte i_boardHeight, byte i_boardWidth)
+       public UI()
         {
-            m_firstPlayer = i_firstPlayer;
-            m_secondPlayer = i_secondPlayer;
-            m_gameType = i_gameType;
-            m_boardHeight = i_boardHeight;
-            m_boardWidth = i_boardWidth;
         }
 
         public void StartGame()
         {
-            m_firstPlayer = InitializePlayer("first player");
-            m_gameType = InitializeGameType();
+            Utils.firstPlayer = InitializePlayer("first player");
+            Utils.gameType = InitializeGameType();
 
-            if (m_gameType == 2)
+            if (Utils.gameType == 2)
             {
-                m_secondPlayer = InitializePlayer("second player");
+                Utils.secondPlayer = InitializePlayer("second player");
             }
 
-            byte[] dimensions = InitializeBoardDimensions();
-            m_boardHeight = dimensions[0];
-            m_boardWidth = dimensions[1];
+            InitializeBoardDimensions();
         }
 
         public static string InitializePlayer(string io_playerNumber)
@@ -60,40 +47,39 @@ namespace B20_Ex02
             return byteGameType;
         }
 
-        public static byte[] InitializeBoardDimensions()
+        public static void InitializeBoardDimensions()
         {
             byte byteBoardHeight = 0;
             byte byteBoardWidth = 0;
             bool cellNumberEven = false;
             while (!cellNumberEven)
             {
-                string boardHeight = GetBoardHeight();
+                string boardHeight = GetBoardDimension("height");
                 byteBoardHeight = IsDimensionValid(boardHeight);
                 while (byteBoardHeight == 0)
                 {
-                    boardHeight = GetBoardHeight();
+                    boardHeight = GetBoardDimension("height");
                     byteBoardHeight = IsDimensionValid(boardHeight);
                 }
 
-                string boardWidth = GetBoardWidth();
+                string boardWidth = GetBoardDimension("width");
                 byteBoardWidth = IsDimensionValid(boardWidth);
                 while (byteBoardWidth == 0)
                 {
-                    boardWidth = GetBoardHeight();
+                    boardWidth = GetBoardDimension("width");
                     byteBoardWidth = IsDimensionValid(boardWidth);
                 }
 
                 cellNumberEven = IsCellNumberEven(byteBoardHeight, byteBoardWidth);
             }
 
-            byte[] dimensions = { byteBoardHeight, byteBoardWidth };
-            return dimensions;
+            Utils.boardHeight = byteBoardHeight;
+            Utils.boardWidth = byteBoardWidth;
         }
 
         public static string GetInputName(string io_playerNumber)
         {
-            string msg = string.Format(@"Please enter {0} name", io_playerNumber);
-            Console.WriteLine(msg);
+            Console.WriteLine(string.Format(@"Please enter {0} name", io_playerNumber));
             string strInputName = Console.ReadLine();
 
             return strInputName;
@@ -142,8 +128,9 @@ namespace B20_Ex02
 
         public static string GetGameType()
         {
-            Console.WriteLine(
-                "If you wish to play against the computer - press 1. If you wish to play against a second player - press 2");
+            Console.WriteLine(string.Format(@"Hello {0}, 
+If you wish to play against the computer - press 1 
+If you wish to play against a second player - press 2", Utils.firstPlayer));
             string gameType = Console.ReadLine();
 
             return gameType;
@@ -166,20 +153,12 @@ namespace B20_Ex02
             return byte.Parse(i_GameType);
         }
 
-        public static string GetBoardHeight()
+        public static string GetBoardDimension(string io_dimension)
         {
-            Console.WriteLine("Please enter board height between 4 to 6");
+            Console.WriteLine(string.Format(@"Please enter desired board {0} between 4 to 6", io_dimension));
             string boardHeight = Console.ReadLine();
 
             return boardHeight;
-        }
-
-        public static string GetBoardWidth()
-        {
-            Console.WriteLine("Please enter board width between 4 to 6");
-            string boardWidth = Console.ReadLine();
-
-            return boardWidth;
         }
 
         public static byte IsDimensionValid(string i_Dimension)
