@@ -25,7 +25,7 @@ namespace B20_Ex02
             InitializeBoardDimensions();
             int turn = 0;
             string currentPlayer;
-            while(turn < 10)
+            while(turn < 1)
             {
                 if((turn % 2) == 0)
                 {
@@ -260,7 +260,7 @@ Enter your next move ", i_player));
                 return !validMove;
             }
 
-            int[] move = moveToInt(i_move);
+            int[] move = moveToIntArray(i_move);
             int column = move[0] + 1;
             int line = move[1] + 1;
 
@@ -279,7 +279,7 @@ Enter your next move ", i_player));
             return validMove;
         }
 
-        public static int[] moveToInt(string i_move)
+        public static int[] moveToIntArray(string i_move)
         {
             int[] move = { Utils.letterToIndex[i_move[0]], (int.Parse(i_move[1].ToString()) - 1)};
             return move;

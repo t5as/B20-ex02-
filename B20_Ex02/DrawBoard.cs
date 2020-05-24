@@ -9,7 +9,7 @@ namespace B20_Ex02
         public void createBoard()
         {
             char columnLetter = 'A';
-            for (byte i = 0; i <= Utils.boardHeight; i++)
+            for (byte i = 0; i <= Utils.boardHeight + 1; i++)
             {
                 string rowNumber;
                 if (i == 0)
@@ -44,10 +44,10 @@ namespace B20_Ex02
             } 
         }
 
-        public void updateBoard(byte i_rowIndexLetter, byte i_colIndexLetter)
+        public void updateBoard(byte i_colIndexLetter, byte i_rowIndexLetter)
         {
             char columnLetter = 'A';
-            for (byte i = 0; i <= Utils.boardHeight; i++)
+            for (byte i = 0; i <= Utils.boardHeight + 1; i++)
             {
                 string rowNumber;
                 if (i == 0)
@@ -69,7 +69,7 @@ namespace B20_Ex02
                         columnLetter++;
                         boardBorders.Append("========");
                     }
-                    else if(i - 1 == i_rowIndexLetter && j == i_colIndexLetter){
+                    else if(i == i_rowIndexLetter + 1 && j == i_colIndexLetter + 1){
                         GameDataMatrix.setDisplayMatrix((byte)(i - 1), j, GameDataMatrix.dataMatrix[i - 1, j]);
                         string cell = string.Format("   {0}   |", GameDataMatrix.displayMatrix[i - 1, j]);
                         boardRecords.Append(cell);
