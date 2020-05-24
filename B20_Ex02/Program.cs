@@ -8,8 +8,8 @@ namespace B20_Ex02
     { 
         static void Main()
         {
-            UI.StartGame();
-            BoardLogic br = new BoardLogic(boardDimensions[0], boardDimensions[1]);
+            byte[] boardDimensions = Identifier.StartGame();
+            BoardLogic br = new BoardLogic();
             br.createBoard();
             
             GameDataMatrix gdm = new GameDataMatrix(boardDimensions[0], boardDimensions[1]);
@@ -22,7 +22,7 @@ namespace B20_Ex02
                     Console.Write(mat[i, j]);
                 }
                 Console.WriteLine();
-            }
+            } 
         }
     }
 }
