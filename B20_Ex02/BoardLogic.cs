@@ -6,18 +6,6 @@ namespace B20_Ex02
 {
     public class BoardLogic 
     {
-        private byte m_boardHeight;
-        private byte m_boardWidth;
-        private Dictionary<char, int> m_letterToIndex = new Dictionary<char, int>()
-        {
-            {'A', 0},
-            {'B', 1},
-            {'C', 2},
-            {'D', 3},
-            {'E', 4},
-            {'F', 5}
-        };
-
         public BoardLogic(byte i_boardHeight, byte i_boardWidth)
         {
             m_boardHeight = i_boardHeight;
