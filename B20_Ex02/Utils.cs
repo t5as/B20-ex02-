@@ -11,7 +11,7 @@ namespace B20_Ex02
         private static byte m_gameType;
         private static byte m_boardHeight;
         private static byte m_boardWidth;
-        private static Dictionary<char, int> m_letterToIndex = new Dictionary<char, int>()
+        private static Dictionary<char, byte> m_letterToIndex = new Dictionary<char, byte>()
         {
             {'A', 0},
             {'B', 1},
@@ -80,7 +80,7 @@ namespace B20_Ex02
             }
         } 
 
-        public static Dictionary<char, int> letterToIndex
+        public static Dictionary<char, byte> letterToIndex
         {
             get
             {
@@ -114,5 +114,14 @@ namespace B20_Ex02
             }
             return false;
         }
-    }
+
+        public static bool cellIsTaken(byte i_rowIndex, byte i_colIndex)
+        {
+            if (GameDataMatrix.displayMatrix[i_rowIndex, i_colIndex] != ' ')
+            {
+                return true;
+            }
+            return false;
+        }
+    } 
 }

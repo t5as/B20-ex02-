@@ -19,36 +19,10 @@ namespace B20_Ex02
             }
             else
             {
-                Utils.secondPlayer = "Computer";
+                Utils.secondPlayer = "computer";
             }
 
             InitializeBoardDimensions();
-            int turn = 0;
-            string currentPlayer;
-            while(turn < 1)
-            {
-                if((turn % 2) == 0)
-                {
-                    currentPlayer = Utils.firstPlayer;
-                }
-                else
-                {
-                    currentPlayer = Utils.secondPlayer;
-                }
-                
-                for (int i = 0; i < 2; i++)
-                {
-                    string move = GetCurrentMove(currentPlayer);
-                    bool moveValid = IsValidMove(move);
-                    while (!moveValid)
-                    {
-                        move = GetCurrentMove(currentPlayer);
-                        moveValid = IsValidMove(move);
-                    }
-                }
-
-                turn++;
-            }
         }
 
         public static string InitializePlayer(string io_playerNumber)
@@ -260,9 +234,9 @@ Enter your next move ", i_player));
                 return !validMove;
             }
 
-            int[] move = moveToIntArray(i_move);
-            int column = move[0] + 1;
-            int line = move[1] + 1;
+            byte[] move = moveToByteArray(i_move);
+            byte column = (byte)(move[1] + 1);
+            byte line = (byte)(move[0] + 1);
 
             if (column < 1 || column > Utils.boardWidth)
             {
@@ -275,13 +249,19 @@ Enter your next move ", i_player));
                 Console.WriteLine("There is no such line, please enter a valid board location");
                 return !validMove;
             }
+            //Console.WriteLine(line + "," +  column);
+            if(Utils.cellIsTaken((byte)(line - 1), (byte)(column - 1)))
+            {
+                Console.WriteLine("The cell has already been used, please re-enter a board location");
+                return !validMove;
+            }
 
             return validMove;
         }
 
-        public static int[] moveToIntArray(string i_move)
+        public static byte[] moveToByteArray(string i_move)
         {
-            int[] move = { Utils.letterToIndex[i_move[0]], (int.Parse(i_move[1].ToString()) - 1)};
+            byte[] move = { (byte)(int.Parse(i_move[1].ToString()) - 1), Utils.letterToIndex[i_move[0]] };
             return move;
         }
     }

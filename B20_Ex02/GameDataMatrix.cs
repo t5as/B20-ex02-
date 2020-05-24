@@ -15,7 +15,7 @@ namespace B20_Ex02
 
         public GameDataMatrix()
         {
-            m_rowsCount = (byte)(Utils.boardHeight + 1);
+            m_rowsCount = Utils.boardHeight;
             m_columnsCount = Utils.boardWidth;
             m_dataMatrix = new char[m_rowsCount, m_columnsCount];
             m_displayMatrix = new char[m_rowsCount, m_columnsCount];
