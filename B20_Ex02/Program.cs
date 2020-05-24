@@ -25,16 +25,17 @@ namespace B20_Ex02
                 {
                     GameLogic.m_currentPlayer = Utils.secondPlayer;
                 }
+                Console.WriteLine(GameLogic.m_currentPlayer);
 
-                for (int i = 0; i < 2; i++)
+                for (byte i = 0; i < 2; i++)
                 {
-                    //System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(2000);
                     //Ex02.ConsoleUtils.Screen.Clear();
-                    string move = UI.GetCurrentMove(GameLogic.m_currentPlayer);
+                    string move = GameLogic.guessNextMove(i);
                     bool moveValid = UI.IsValidMove(move);
                     while (!moveValid)
                     {
-                        move = UI.GetCurrentMove(GameLogic.m_currentPlayer);
+                        move = GameLogic.guessNextMove(i);
                         moveValid = UI.IsValidMove(move);
                     } 
                     if(i == 0)
@@ -48,7 +49,11 @@ namespace B20_Ex02
                     byte[] check = UI.moveToByteArray(move);
                     br.updateBoard(check[0], check[1]);
                 }
-                GameLogic.matchingPair();
+                GameLogic.matchingPair(); 
+                if(GameLogic.m_currentPlayer == Utils.firstPlayer && GameLogic.m_hadSuccess == true)
+                {
+
+                }
                 GameLogic.m_turn++;
                             
             } 

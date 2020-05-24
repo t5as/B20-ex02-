@@ -10,6 +10,7 @@ namespace B20_Ex02
         public static string m_currentPlayer;
         public static byte m_firstPlayerScore = 0;
         public static byte m_secondPlayerScore = 0;
+        public static bool m_hadSuccess = false;
         public static byte[] m_firstCellPick;
         public static byte[] m_secondCellPick;
 
@@ -31,16 +32,42 @@ namespace B20_Ex02
                 if(m_currentPlayer == Utils.firstPlayer)
                 {
                     m_firstPlayerScore++;
+                    GameLogic.m_hadSuccess = true;
                 }
                 else
                 {
                     m_secondPlayerScore++;
+                    GameLogic.m_hadSuccess = true;
                 }
                 m_turn--;
             }
             else
             {
                 deleteLastPlayerChoices();
+                if(Utils.secondPlayer == "computer")
+                {
+                    ComputerPlayer.reInsertValues();
+                }
+            }
+        } 
+
+        public static string guessNextMove( byte i_numberOfGuess)
+        {
+            if (GameLogic.m_currentPlayer == "computer")
+            {
+                ComputerPlayer computer = new ComputerPlayer();
+                if (i_numberOfGuess == 0)
+                {
+                    return computer.firstGuess;
+                }
+                else
+                {
+                    return computer.secondGuess;
+                }
+            }
+            else
+            {
+                return UI.GetCurrentMove(GameLogic.m_currentPlayer);
             }
         }
 
