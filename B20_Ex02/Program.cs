@@ -8,7 +8,7 @@ namespace B20_Ex02
     { 
         static void Main()
         {
-            byte[] boardDimensions = Identifier.StartGame();
+            UI.StartGame();
             BoardLogic br = new BoardLogic(boardDimensions[0], boardDimensions[1]);
             br.createBoard();
             

@@ -2,29 +2,45 @@
 
 namespace B20_Ex02
 {
-    public class Identifier
+    public class UI
     {
-        public static byte[] StartGame()
-        {
-            string firstPlayer = InitializePlayer();
-            byte gameType = InitializeGameType();
+        private string m_firstPlayer;
+        private string m_secondPlayer;
+        private byte m_gameType;
+        private byte m_boardHeight;
+        private byte m_boardWidth;
 
-            if (gameType == 2)
+        public UI(string i_firstPlayer, string i_secondPlayer, byte i_gameType, byte i_boardHeight, byte i_boardWidth)
+        {
+            m_firstPlayer = i_firstPlayer;
+            m_secondPlayer = i_secondPlayer;
+            m_gameType = i_gameType;
+            m_boardHeight = i_boardHeight;
+            m_boardWidth = i_boardWidth;
+        }
+
+        public void StartGame()
+        {
+            m_firstPlayer = InitializePlayer("first player");
+            m_gameType = InitializeGameType();
+
+            if (m_gameType == 2)
             {
-                string secondPlayer = InitializePlayer();
+                m_secondPlayer = InitializePlayer("second player");
             }
 
             byte[] dimensions = InitializeBoardDimensions();
-            return dimensions;
+            m_boardHeight = dimensions[0];
+            m_boardWidth = dimensions[1];
         }
 
-        public static string InitializePlayer()
+        public static string InitializePlayer(string io_playerNumber)
         {
-            string player = GetInputName();
+            string player = GetInputName(io_playerNumber);
             bool playerValid = IsValidName(player);
             while (!playerValid)
             {
-                player = GetInputName();
+                player = GetInputName(io_playerNumber);
                 playerValid = IsValidName(player);
             }
 
@@ -74,9 +90,10 @@ namespace B20_Ex02
             return dimensions;
         }
 
-        public static string GetInputName()
+        public static string GetInputName(string io_playerNumber)
         {
-            Console.WriteLine("Please enter your name");
+            string msg = string.Format(@"Please enter {0} name", io_playerNumber);
+            Console.WriteLine(msg);
             string strInputName = Console.ReadLine();
 
             return strInputName;

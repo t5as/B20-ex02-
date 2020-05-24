@@ -33,7 +33,7 @@
   <ItemGroup>
     <Compile Include="BoardLogic.cs" />
     <Compile Include="GameDataMatrix.cs" />
-    <Compile Include="Identifier.cs" />
+    <Compile Include="UI.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
