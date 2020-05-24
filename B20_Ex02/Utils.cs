@@ -87,5 +87,32 @@ namespace B20_Ex02
                 return m_letterToIndex;
             }
         }
+
+        public static bool charExistsInArray(char[] i_lettersArray, char i_letter)
+        {
+            if (Array.IndexOf(i_lettersArray, i_letter) == -1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        } 
+
+        public static bool charExistsInMatrix(char[,] i_lettersMatrix, char i_letter)
+        {
+            for(int i = 0; i < m_boardHeight; i++)
+            {
+                for(int j = 0; j < m_boardWidth; j++)
+                {
+                    if(i_lettersMatrix[i, j] == i_letter)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

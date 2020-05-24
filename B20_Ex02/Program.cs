@@ -8,22 +8,23 @@ namespace B20_Ex02
     { 
         static void Main()
         {
-            UI ui = new UI();
-            ui.StartGame();
-            BoardLogic br = new BoardLogic();
-            br.createBoard();
-            
-            GameDataMatrix gdm = new GameDataMatrix(Utils.boardHeight, Utils.boardWidth);
-            gdm.setDataMatrix();
-            char[,] mat = gdm.getDataMatrix;           
-            for(int i = 0; i < Utils.boardHeight; i++)
+            //byte[] boardDimensions = Identifier.StartGame();
+            Utils.boardHeight = 4;
+            Utils.boardWidth = 6;
+            GameDataMatrix gdm = new GameDataMatrix();
+            gdm.setMatrices(); 
+            /*for(int i = 0; i < Utils.boardHeight; i++)
             {
                 for(int j = 0; j < Utils.boardWidth; j++)
                 {
-                    Console.Write(mat[i, j]);
+                    Console.Write(GameDataMatrix.getDataMatrix[i, j]);
                 }
                 Console.WriteLine();
-            } 
+            }*/
+            DrawBoard br = new DrawBoard();
+            br.createBoard();
+            br.updateBoard(0, 4);
+            Console.WriteLine(Utils.charExistsInMatrix(GameDataMatrix.dataMatrix, ' '));
         }
     }
 }
