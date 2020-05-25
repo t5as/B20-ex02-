@@ -209,6 +209,11 @@ If you wish to play against a second player - press 2", Utils.firstPlayer));
 Enter your next move ", i_player));
             string currentMove = Console.ReadLine();
 
+            if(currentMove == "Q")
+            {
+                Environment.Exit(0);
+            }
+
             return currentMove;
         }
 
@@ -263,6 +268,21 @@ Enter your next move ", i_player));
         {
             byte[] move = { (byte)(int.Parse(i_move[1].ToString()) - 1), Utils.letterToIndex[i_move[0]] };
             return move;
+        }
+
+        public static int startNewGame()
+        {
+            Console.WriteLine("If you wish to start a new game - press 1. else - press 0.");
+            string start = Console.ReadLine();
+            
+            if(start != "1" && start != "0")
+            {
+                Console.WriteLine("Invaild value. please try again");
+                return -1;
+            }
+
+            return int.Parse(start);
+
         }
     }
 }
