@@ -6,7 +6,7 @@ namespace B20_Ex02
 {
     public class GameLogic
     { 
-        public static byte m_turn;
+        public static byte m_gameTurn;
         public static string m_currentPlayer;
         public static string m_currentPlayerFirstMove;
         public static string m_currentPlayerSecondMove;
@@ -17,6 +17,18 @@ namespace B20_Ex02
         public static byte[] m_secondCellPick;
 
 
+
+        public static void setCurrentPlayer()
+        {
+            if (m_gameTurn % 2 == 0)
+            {
+               m_currentPlayer = Utils.firstPlayer;
+            }
+            else
+            {
+                m_currentPlayer = Utils.secondPlayer;
+            }
+        }
 
         public static void deleteLastPlayerChoices()
         {
@@ -44,7 +56,7 @@ namespace B20_Ex02
                 {
                     m_secondPlayerScore++;                    
                 }
-                m_turn--;
+                m_gameTurn--;
             }
             else
             {
@@ -73,6 +85,18 @@ namespace B20_Ex02
             {
                 return UI.GetCurrentMove(GameLogic.m_currentPlayer);
             }
+        } 
+
+        public static string getNextMove(byte i_choiceNumber)
+        {
+            string move = GameLogic.guessNextMove(i_choiceNumber);
+            bool moveValid = UI.IsValidMove(move);
+            while (!moveValid)
+            {
+                move = GameLogic.guessNextMove(i_choiceNumber);
+                moveValid = UI.IsValidMove(move);
+            }
+            return move;
         }
 
 

@@ -17,32 +17,19 @@ namespace B20_Ex02
                 gdm.setMatrices();
                 DrawBoard br = new DrawBoard();
                 DrawBoard.createBoard();
-                GameLogic.m_turn = 0;
+                GameLogic.m_gameTurn = 0;
                 if (Utils.secondPlayer == "computer")
                 {
                     ComputerPlayer computerPlayer = new ComputerPlayer();
                 }
                 while (Utils.charExistsInMatrix(GameDataMatrix.displayMatrix, ' '))
                 {
-                    if ((GameLogic.m_turn % 2) == 0)
-                    {
-                        GameLogic.m_currentPlayer = Utils.firstPlayer;
-                    }
-                    else
-                    {
-                        GameLogic.m_currentPlayer = Utils.secondPlayer;
-                    }
+                    GameLogic.setCurrentPlayer();
                     Console.WriteLine(GameLogic.m_currentPlayer);
 
                     for (byte i = 0; i < 2; i++)
-                    {                                               
-                        string move = GameLogic.guessNextMove(i);
-                        bool moveValid = UI.IsValidMove(move);
-                        while (!moveValid)
-                        {
-                            move = GameLogic.guessNextMove(i);
-                            moveValid = UI.IsValidMove(move);
-                        }
+                    {
+                        string move = GameLogic.getNextMove(i);
 
                         if (i == 0)
                         {
@@ -50,6 +37,7 @@ namespace B20_Ex02
                             {
                                 GameLogic.m_currentPlayerFirstMove = move;
                             }
+
                             GameLogic.m_firstCellPick = UI.moveToByteArray(move);
                         }
                         else
@@ -58,15 +46,19 @@ namespace B20_Ex02
                             {
                                 GameLogic.m_currentPlayerSecondMove = move;
                             }
+
                             GameLogic.m_secondCellPick = UI.moveToByteArray(move);
                         }
+
                         byte[] check = UI.moveToByteArray(move);
                         br.updateBoard(check[0], check[1]);
                     }
+
                     GameLogic.matchingPair();
-                    GameLogic.m_turn++;
+                    GameLogic.m_gameTurn++;
 
                 }
+
                 if (GameLogic.m_firstPlayerScore > GameLogic.m_secondPlayerScore)
                 {
                     Console.WriteLine("First player won");
@@ -81,11 +73,11 @@ namespace B20_Ex02
                 }
 
                 answer = UI.startNewGame(); 
-                while(answer == -1)
+                while (answer == -1)
                 {
                     answer = UI.startNewGame();
                 } 
-                if(answer == 0)
+                if (answer == 0)
                 {
                     Console.WriteLine("Until next time");
                 }
