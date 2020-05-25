@@ -26,7 +26,7 @@ namespace B20_Ex02
             }
         }  
 
-        public string firstGuess
+        public static string firstGuess
         {
             get
             {
@@ -36,12 +36,12 @@ namespace B20_Ex02
             }
         } 
 
-        public string secondGuess
+        public static string secondGuess
         {
             get
             {
                 m_secondGuess = getRandomCellsPlace();
-                Console.WriteLine("Second: " + m_secondGuess);
+                Console.WriteLine("Second: " + m_secondGuess);                
                 return m_secondGuess;
             }
         } 
@@ -51,7 +51,7 @@ namespace B20_Ex02
             m_availableCellsInBoard.Remove(i_locationInBoard);
         }
 
-        private string getRandomCellsPlace()
+        private static string getRandomCellsPlace()
         {
             Random rand = new Random();
             int nodeIndex = rand.Next(m_availableCellsInBoard.Count); 

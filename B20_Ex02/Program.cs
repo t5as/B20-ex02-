@@ -14,7 +14,11 @@ namespace B20_Ex02
             gdm.setMatrices();
             DrawBoard br = new DrawBoard();
             DrawBoard.createBoard();
-            GameLogic.m_turn = 0;
+            GameLogic.m_turn = 0;  
+            if(Utils.secondPlayer == "computer")
+            {
+                ComputerPlayer computerPlayer = new ComputerPlayer();
+            }
             while (Utils.charExistsInMatrix(GameDataMatrix.displayMatrix, ' '))
             {                      
                 if((GameLogic.m_turn % 2) == 0)
@@ -37,23 +41,28 @@ namespace B20_Ex02
                     {
                         move = GameLogic.guessNextMove(i);
                         moveValid = UI.IsValidMove(move);
-                    } 
+                    }
+                    
                     if(i == 0)
                     {
+                        if(GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
+                        {
+                            GameLogic.m_currentPlayerFirstMove = move;
+                        }
                         GameLogic.m_firstCellPick = UI.moveToByteArray(move);
                     }
                     else
                     {
+                        if (GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
+                        {
+                            GameLogic.m_currentPlayerSecondMove = move;
+                        }
                         GameLogic.m_secondCellPick = UI.moveToByteArray(move);
                     }
                     byte[] check = UI.moveToByteArray(move);
                     br.updateBoard(check[0], check[1]);
                 }
                 GameLogic.matchingPair(); 
-                if(GameLogic.m_currentPlayer == Utils.firstPlayer && GameLogic.m_hadSuccess == true)
-                {
-
-                }
                 GameLogic.m_turn++;
                             
             } 

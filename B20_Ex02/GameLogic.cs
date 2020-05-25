@@ -8,6 +8,8 @@ namespace B20_Ex02
     { 
         public static byte m_turn;
         public static string m_currentPlayer;
+        public static string m_currentPlayerFirstMove;
+        public static string m_currentPlayerSecondMove;
         public static byte m_firstPlayerScore = 0;
         public static byte m_secondPlayerScore = 0;
         public static bool m_hadSuccess = false;
@@ -31,21 +33,24 @@ namespace B20_Ex02
             {
                 if(m_currentPlayer == Utils.firstPlayer)
                 {
-                    m_firstPlayerScore++;
-                    GameLogic.m_hadSuccess = true;
+                    m_firstPlayerScore++;                   
+                    if(Utils.secondPlayer == "computer")
+                    {
+                        ComputerPlayer.removeFromAvailableCellsInBoard(m_currentPlayerFirstMove);
+                        ComputerPlayer.removeFromAvailableCellsInBoard(m_currentPlayerSecondMove);
+                    }
                 }
                 else
                 {
-                    m_secondPlayerScore++;
-                    GameLogic.m_hadSuccess = true;
+                    m_secondPlayerScore++;                    
                 }
                 m_turn--;
             }
             else
             {
                 deleteLastPlayerChoices();
-                if(Utils.secondPlayer == "computer")
-                {
+                if(Utils.secondPlayer == "computer" && GameLogic.m_currentPlayer == "computer")
+                {      
                     ComputerPlayer.reInsertValues();
                 }
             }
@@ -54,15 +59,14 @@ namespace B20_Ex02
         public static string guessNextMove( byte i_numberOfGuess)
         {
             if (GameLogic.m_currentPlayer == "computer")
-            {
-                ComputerPlayer computer = new ComputerPlayer();
+            {                
                 if (i_numberOfGuess == 0)
                 {
-                    return computer.firstGuess;
+                    return ComputerPlayer.firstGuess;
                 }
                 else
                 {
-                    return computer.secondGuess;
+                    return ComputerPlayer.secondGuess;
                 }
             }
             else
