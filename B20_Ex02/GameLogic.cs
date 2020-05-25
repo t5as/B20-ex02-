@@ -97,6 +97,22 @@ namespace B20_Ex02
                 moveValid = UI.IsValidMove(move);
             }
             return move;
+        } 
+
+        public static void gameResult()
+        {
+            if (m_firstPlayerScore > m_secondPlayerScore)
+            {
+                Console.WriteLine("First player won");
+            }
+            else if (m_firstPlayerScore < m_secondPlayerScore)
+            {
+                Console.WriteLine("Second player won");
+            }
+            else
+            {
+                Console.WriteLine("Draw");
+            }
         }
 
 

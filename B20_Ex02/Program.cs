@@ -58,20 +58,7 @@ namespace B20_Ex02
                     GameLogic.m_gameTurn++;
 
                 }
-
-                if (GameLogic.m_firstPlayerScore > GameLogic.m_secondPlayerScore)
-                {
-                    Console.WriteLine("First player won");
-                }
-                else if (GameLogic.m_firstPlayerScore < GameLogic.m_secondPlayerScore)
-                {
-                    Console.WriteLine("Second player won");
-                }
-                else
-                {
-                    Console.WriteLine("Draw");
-                }
-
+                GameLogic.gameResult();
                 answer = UI.startNewGame(); 
                 while (answer == -1)
                 {
