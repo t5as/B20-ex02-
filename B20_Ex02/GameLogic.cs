@@ -109,11 +109,11 @@ namespace B20_Ex02
         {
             if (m_FirstPlayerScore > m_SecondPlayerScore)
             {
-                Console.WriteLine(string.Format(@"First player won: {0} - {1}", m_FirstPlayerScore, m_SecondPlayerScore));
+                Console.WriteLine(string.Format(@"{0} player won: {1} - {2}", Utils.FirstPlayer, m_FirstPlayerScore, m_SecondPlayerScore));
             }
             else if (m_FirstPlayerScore < m_SecondPlayerScore)
             {
-                Console.WriteLine(string.Format(@"Second player won: {0} - {1}", m_FirstPlayerScore, m_SecondPlayerScore));
+                Console.WriteLine(string.Format(@"{0} player won: {1} - {2}", Utils.SecondPlayer, m_FirstPlayerScore, m_SecondPlayerScore));
             }
             else
             {

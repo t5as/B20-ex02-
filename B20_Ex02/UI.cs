@@ -100,7 +100,7 @@ namespace B20_Ex02
 
             if(!char.IsUpper(i_StrInputName[0]))
             {
-                Console.WriteLine("Invalid name - Name should start in a capital English letter");
+                Console.WriteLine("Invalid name - Name should start with a capital English letter");
                 return !v_ValidName;
             }
 
@@ -115,7 +115,7 @@ namespace B20_Ex02
                 if (!char.IsLower(i_StrInputName[i]))
                 {
                     Console.WriteLine(
-                        "Invalid name - Name should start in a capital English letter, followed by lower English letter");
+                        "Invalid name - Name should start with a capital English letter, followed by lower English letter");
                     return !v_ValidName;
                 }
             }
@@ -221,15 +221,9 @@ If you wish to play against a second player - press 2",
                 return !v_ValidMove;
             }
 
-            if(!char.IsLetter(i_Move[0]))
+            if(!char.IsLetter(i_Move[0]) || char.IsLower(i_Move[0]) || !char.IsDigit(i_Move[1]))
             {
-                Console.WriteLine("There is no such column, please enter a valid board location");
-                return !v_ValidMove;
-            }
-
-            if(!char.IsDigit(i_Move[1]))
-            {
-                Console.WriteLine("There is no such line, please enter a valid board location");
+                Console.WriteLine("Invalid move, please enter a valid board entry");
                 return !v_ValidMove;
             }
 
@@ -239,19 +233,19 @@ If you wish to play against a second player - press 2",
 
             if(column < 1 || column > Utils.BoardWidth)
             {
-                Console.WriteLine("There is no such column, please enter a valid board location");
+                Console.WriteLine("There is no such column, please enter a valid board entry");
                 return !v_ValidMove;
             }
 
             if(line < 1 || line > Utils.BoardHeight)
             {
-                Console.WriteLine("There is no such line, please enter a valid board location");
+                Console.WriteLine("There is no such line, please enter a valid board entry");
                 return !v_ValidMove;
             }
 
             if(Utils.cellIsTaken((byte)(line - 1), (byte)(column - 1)))
             {
-                Console.WriteLine("The cell has already been used, please re-enter a board location");
+                Console.WriteLine("The cell has already been used, please re-enter a board entry");
                 return !v_ValidMove;
             }
 
