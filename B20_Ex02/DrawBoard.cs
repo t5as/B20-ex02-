@@ -38,6 +38,7 @@ namespace B20_Ex02
 
         public static void UpdateBoard(byte i_RowIndexLetter, byte i_ColIndexLetter)
         {
+            Ex02.ConsoleUtils.Screen.Clear();
             char columnLetter = 'A';
 
             for(byte i = 0; i <= Utils.BoardHeight; i++)

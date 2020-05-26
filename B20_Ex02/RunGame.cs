@@ -44,7 +44,6 @@ namespace B20_Ex02
             while(Utils.CharExistsInMatrix(GameDataMatrix.DisplayMatrix, ' '))
             {
                 GameLogic.SetCurrentPlayer();
-                Console.WriteLine(GameLogic.m_CurrentPlayer);
 
                 for(byte i = 0; i < 2; i++)
                 {

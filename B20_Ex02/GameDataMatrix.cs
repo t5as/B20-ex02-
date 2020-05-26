@@ -44,9 +44,9 @@ namespace B20_Ex02
 
         private char getRandomLetter()
         {
-            const string k_Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            int indexChoice = r_Random.Next(0, k_Letters.Length - 1);
-            return k_Letters[indexChoice];
+            const string v_Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            int indexChoice = r_Random.Next(0, v_Letters.Length - 1);
+            return v_Letters[indexChoice];
         } 
         
         private void setRandomLettersArray()

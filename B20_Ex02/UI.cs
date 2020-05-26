@@ -84,24 +84,24 @@ namespace B20_Ex02
 
         public static bool IsValidName(string i_StrInputName)
         {
-            const bool k_ValidName = true;
+            const bool v_ValidName = true;
 
             if(i_StrInputName.Length < 2)
             {
                 Console.WriteLine("Invalid name - Name should contain at least two letters");
-                return !k_ValidName;
+                return !v_ValidName;
             }
 
             if(!char.IsLetter(i_StrInputName[0]))
             {
                 Console.WriteLine("Invalid name - Name should contain only English letters");
-                return !k_ValidName;
+                return !v_ValidName;
             }
 
             if(!char.IsUpper(i_StrInputName[0]))
             {
                 Console.WriteLine("Invalid name - Name should start in a capital English letter");
-                return !k_ValidName;
+                return !v_ValidName;
             }
 
             for(int i = 1; i < i_StrInputName.Length; i++)
@@ -109,18 +109,18 @@ namespace B20_Ex02
                 if (!char.IsLetter(i_StrInputName[i]))
                 {
                     Console.WriteLine("Invalid name - Name should contain only English letters");
-                    return !k_ValidName;
+                    return !v_ValidName;
                 }
                 
                 if (!char.IsLower(i_StrInputName[i]))
                 {
                     Console.WriteLine(
                         "Invalid name - Name should start in a capital English letter, followed by lower English letter");
-                    return !k_ValidName;
+                    return !v_ValidName;
                 }
             }
 
-            return k_ValidName;
+            return v_ValidName;
         }
 
         private static string getGameType()
@@ -187,15 +187,15 @@ If you wish to play against a second player - press 2",
 
         private static bool isCellNumberEven(byte i_Height, byte i_Width)
         {
-            const bool k_CellNumberEven = true;
+            const bool v_CellNumberEven = true;
 
             if(((i_Height * i_Width) % 2) != 0)
             {
                 Console.WriteLine("The board contains odd number of cells - Please choose height and width again");
-                return !k_CellNumberEven;
+                return !v_CellNumberEven;
             }
 
-            return k_CellNumberEven;
+            return v_CellNumberEven;
         }
 
         public static string GetCurrentMove(string i_Player)
@@ -213,24 +213,24 @@ If you wish to play against a second player - press 2",
 
         public static bool IsValidMove(string i_Move)
         {
-            const bool k_ValidMove = true;
+            const bool v_ValidMove = true;
             
             if(i_Move.Length != 2)
             {
                 Console.WriteLine("Invalid move length, please try again");
-                return !k_ValidMove;
+                return !v_ValidMove;
             }
 
             if(!char.IsLetter(i_Move[0]))
             {
                 Console.WriteLine("There is no such column, please enter a valid board location");
-                return !k_ValidMove;
+                return !v_ValidMove;
             }
 
             if(!char.IsDigit(i_Move[1]))
             {
                 Console.WriteLine("There is no such line, please enter a valid board location");
-                return !k_ValidMove;
+                return !v_ValidMove;
             }
 
             byte[] move = MoveToByteArray(i_Move);
@@ -240,22 +240,22 @@ If you wish to play against a second player - press 2",
             if(column < 1 || column > Utils.BoardWidth)
             {
                 Console.WriteLine("There is no such column, please enter a valid board location");
-                return !k_ValidMove;
+                return !v_ValidMove;
             }
 
             if(line < 1 || line > Utils.BoardHeight)
             {
                 Console.WriteLine("There is no such line, please enter a valid board location");
-                return !k_ValidMove;
+                return !v_ValidMove;
             }
 
             if(Utils.cellIsTaken((byte)(line - 1), (byte)(column - 1)))
             {
                 Console.WriteLine("The cell has already been used, please re-enter a board location");
-                return !k_ValidMove;
+                return !v_ValidMove;
             }
 
-            return k_ValidMove;
+            return v_ValidMove;
         }
 
         public static byte[] MoveToByteArray(string i_Move)
