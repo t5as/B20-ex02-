@@ -1,5 +1,4 @@
 ﻿using System;
-//delete
 
 namespace B20_Ex02
 {
@@ -7,42 +6,42 @@ namespace B20_Ex02
     {    
         public static void StartGame()
         {
-            Utils.FirstPlayer = InitializePlayer("first player");
-            Utils.GameType = InitializeGameType();
+            Utils.FirstPlayer = initializePlayer("first player");
+            Utils.GameType = initializeGameType();
 
-            Utils.SecondPlayer = Utils.GameType == 2 ? InitializePlayer("second player") : "computer";         
-            InitializeBoardDimensions();
+            Utils.SecondPlayer = Utils.GameType == 2 ? initializePlayer("second player") : "computer";         
+            initializeBoardDimensions();
         }
 
-        public static string InitializePlayer(string io_PlayerNumber)
+        private static string initializePlayer(string i_PlayerNumber)
         {
-            string player = GetInputName(io_PlayerNumber);
+            string player = getInputName(i_PlayerNumber);
             bool playerValid = IsValidName(player);
 
             while(!playerValid)
             {
-                player = GetInputName(io_PlayerNumber);
+                player = getInputName(i_PlayerNumber);
                 playerValid = IsValidName(player);
             }
 
             return player;
         }
 
-        public static byte InitializeGameType()
+        private static byte initializeGameType()
         {
-            string gameType = GetGameType();
-            byte byteGameType = IsValidGameType(gameType);
+            string gameType = getGameType();
+            byte byteGameType = isValidGameType(gameType);
 
             while(byteGameType == 0)
             {
-                gameType = GetGameType();
-                byteGameType = IsValidGameType(gameType);
+                gameType = getGameType();
+                byteGameType = isValidGameType(gameType);
             }
 
             return byteGameType;
         }
 
-        public static void InitializeBoardDimensions()
+        private static void initializeBoardDimensions()
         {
             byte byteBoardHeight = 0;
             byte byteBoardWidth = 0;
@@ -50,34 +49,34 @@ namespace B20_Ex02
 
             while(!cellNumberEven)
             {
-                string boardHeight = GetBoardDimension("height");
-                byteBoardHeight = IsDimensionValid(boardHeight);
+                string boardHeight = getBoardDimension("height");
+                byteBoardHeight = isDimensionValid(boardHeight);
 
                 while(byteBoardHeight == 0)
                 {
-                    boardHeight = GetBoardDimension("height");
-                    byteBoardHeight = IsDimensionValid(boardHeight);
+                    boardHeight = getBoardDimension("height");
+                    byteBoardHeight = isDimensionValid(boardHeight);
                 }
 
-                string boardWidth = GetBoardDimension("width");
-                byteBoardWidth = IsDimensionValid(boardWidth);
+                string boardWidth = getBoardDimension("width");
+                byteBoardWidth = isDimensionValid(boardWidth);
 
                 while(byteBoardWidth == 0)
                 {
-                    boardWidth = GetBoardDimension("width");
-                    byteBoardWidth = IsDimensionValid(boardWidth);
+                    boardWidth = getBoardDimension("width");
+                    byteBoardWidth = isDimensionValid(boardWidth);
                 }
 
-                cellNumberEven = IsCellNumberEven(byteBoardHeight, byteBoardWidth);
+                cellNumberEven = isCellNumberEven(byteBoardHeight, byteBoardWidth);
             }
 
             Utils.BoardHeight = byteBoardHeight;
             Utils.BoardWidth = byteBoardWidth;
         }
 
-        public static string GetInputName(string io_PlayerNumber)
+        private static string getInputName(string i_PlayerNumber)
         {
-            Console.WriteLine(string.Format(@"Please enter {0} name", io_PlayerNumber));
+            Console.WriteLine(string.Format(@"Please enter {0} name", i_PlayerNumber));
             string strInputName = Console.ReadLine();
 
             return strInputName;
@@ -85,24 +84,24 @@ namespace B20_Ex02
 
         public static bool IsValidName(string i_StrInputName)
         {
-            bool validName = true;
+            const bool k_ValidName = true;
 
             if(i_StrInputName.Length < 2)
             {
                 Console.WriteLine("Invalid name - Name should contain at least two letters");
-                return !validName;
+                return !k_ValidName;
             }
 
             if(!char.IsLetter(i_StrInputName[0]))
             {
                 Console.WriteLine("Invalid name - Name should contain only English letters");
-                return !validName;
+                return !k_ValidName;
             }
 
             if(!char.IsUpper(i_StrInputName[0]))
             {
                 Console.WriteLine("Invalid name - Name should start in a capital English letter");
-                return !validName;
+                return !k_ValidName;
             }
 
             for(int i = 1; i < i_StrInputName.Length; i++)
@@ -110,31 +109,33 @@ namespace B20_Ex02
                 if (!char.IsLetter(i_StrInputName[i]))
                 {
                     Console.WriteLine("Invalid name - Name should contain only English letters");
-                    return !validName;
+                    return !k_ValidName;
                 }
                 
                 if (!char.IsLower(i_StrInputName[i]))
                 {
                     Console.WriteLine(
                         "Invalid name - Name should start in a capital English letter, followed by lower English letter");
-                    return !validName;
+                    return !k_ValidName;
                 }
             }
 
-            return validName;
+            return k_ValidName;
         }
 
-        public static string GetGameType()
+        private static string getGameType()
         {
-            Console.WriteLine(string.Format(@"Hello {0}, 
+            Console.WriteLine(string.Format(
+                @"Hello {0}, 
 If you wish to play against the computer - press 1 
-If you wish to play against a second player - press 2", Utils.FirstPlayer));
+If you wish to play against a second player - press 2", 
+                Utils.FirstPlayer));
             string gameType = Console.ReadLine();
 
             return gameType;
         }
 
-        public static byte IsValidGameType(string i_GameType)
+        private static byte isValidGameType(string i_GameType)
         {
             if(i_GameType.Length != 1)
             {
@@ -151,15 +152,15 @@ If you wish to play against a second player - press 2", Utils.FirstPlayer));
             return byte.Parse(i_GameType);
         }
 
-        public static string GetBoardDimension(string io_Dimension)
+        private static string getBoardDimension(string i_Dimension)
         {
-            Console.WriteLine(string.Format(@"Please enter desired board {0} between 4 to 6", io_Dimension));
+            Console.WriteLine(string.Format(@"Please enter desired board {0} between 4 to 6", i_Dimension));
             string boardHeight = Console.ReadLine();
 
             return boardHeight;
         }
 
-        public static byte IsDimensionValid(string i_Dimension)
+        private static byte isDimensionValid(string i_Dimension)
         {
             if(i_Dimension.Length != 1)
             {
@@ -184,17 +185,17 @@ If you wish to play against a second player - press 2", Utils.FirstPlayer));
             return byteDimension;
         }
 
-        public static bool IsCellNumberEven(byte i_Height, byte i_Width)
+        private static bool isCellNumberEven(byte i_Height, byte i_Width)
         {
-            bool cellNumberEven = true;
+            const bool k_CellNumberEven = true;
 
             if(((i_Height * i_Width) % 2) != 0)
             {
                 Console.WriteLine("The board contains odd number of cells - Please choose height and width again");
-                return !cellNumberEven;
+                return !k_CellNumberEven;
             }
 
-            return cellNumberEven;
+            return k_CellNumberEven;
         }
 
         public static string GetCurrentMove(string i_Player)
@@ -212,24 +213,24 @@ If you wish to play against a second player - press 2", Utils.FirstPlayer));
 
         public static bool IsValidMove(string i_Move)
         {
-            bool validMove = true;
+            const bool k_ValidMove = true;
             
             if(i_Move.Length != 2)
             {
                 Console.WriteLine("Invalid move length, please try again");
-                return !validMove;
+                return !k_ValidMove;
             }
 
             if(!char.IsLetter(i_Move[0]))
             {
                 Console.WriteLine("There is no such column, please enter a valid board location");
-                return !validMove;
+                return !k_ValidMove;
             }
 
             if(!char.IsDigit(i_Move[1]))
             {
                 Console.WriteLine("There is no such line, please enter a valid board location");
-                return !validMove;
+                return !k_ValidMove;
             }
 
             byte[] move = MoveToByteArray(i_Move);
@@ -239,28 +240,28 @@ If you wish to play against a second player - press 2", Utils.FirstPlayer));
             if(column < 1 || column > Utils.BoardWidth)
             {
                 Console.WriteLine("There is no such column, please enter a valid board location");
-                return !validMove;
+                return !k_ValidMove;
             }
 
             if(line < 1 || line > Utils.BoardHeight)
             {
                 Console.WriteLine("There is no such line, please enter a valid board location");
-                return !validMove;
+                return !k_ValidMove;
             }
 
             if(Utils.cellIsTaken((byte)(line - 1), (byte)(column - 1)))
             {
                 Console.WriteLine("The cell has already been used, please re-enter a board location");
-                return !validMove;
+                return !k_ValidMove;
             }
 
-            return validMove;
+            return k_ValidMove;
         }
 
         public static byte[] MoveToByteArray(string i_Move)
         {
-            int index = (int)i_Move[0] % 32 - 1;          
-            byte[] move = { (byte)(int.Parse(i_Move[1].ToString()) - 1), (byte)(index) };
+            int index = (int)((i_Move[0] % 32) - 1); 
+            byte[] move = { (byte)(int.Parse(i_Move[1].ToString()) - 1), (byte)index };
             return move;
         }
 
@@ -271,7 +272,7 @@ If you wish to play against a second player - press 2", Utils.FirstPlayer));
             
             if(start != "1" && start != "0")
             {
-                Console.WriteLine("Invaild value. please try again");
+                Console.WriteLine("Invalid value. Please try again");
                 return -1;
             }
 

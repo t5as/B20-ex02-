@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace B20_Ex02
 {
@@ -8,17 +6,20 @@ namespace B20_Ex02
     {
         public static void Run()
         {
-            int answer = 1;
-            while (answer == 1)
+            int restartGame = 1;
+
+            while(restartGame == 1)
             {
                 initializeGame();
                 gameRoutine();
-                answer = UI.StartNewGame();
-                while (answer == -1)
+                restartGame = UI.StartNewGame();
+
+                while(restartGame == -1)
                 {
-                    answer = UI.StartNewGame();
+                    restartGame = UI.StartNewGame();
                 }
-                if (answer == 0)
+
+                if (restartGame == 0)
                 {
                     Console.WriteLine("We hope to see you again!");
                 }
@@ -31,31 +32,33 @@ namespace B20_Ex02
             GameDataMatrix gdm = new GameDataMatrix();
             DrawBoard.CreateBoard();
             GameLogic.m_GameTurn = 0;
+
             if (Utils.SecondPlayer == "computer")
             {
-                ComputerPlayer computerPlayer = new ComputerPlayer();
+                ComputerPlayer.StartComputer();
             }
         }
 
         private static void gameRoutine()
         {
-            while (Utils.CharExistsInMatrix(GameDataMatrix.DisplayMatrix, ' '))
+            while(Utils.CharExistsInMatrix(GameDataMatrix.DisplayMatrix, ' '))
             {
                 GameLogic.SetCurrentPlayer();
                 Console.WriteLine(GameLogic.m_CurrentPlayer);
 
-                for (byte i = 0; i < 2; i++)
+                for(byte i = 0; i < 2; i++)
                 {
                     string move = GameLogic.GetNextMove(i);
                     GameLogic.PlayerTurn(i, move);
                     byte[] check = UI.MoveToByteArray(move);
                     DrawBoard.UpdateBoard(check[0], check[1]);
                 }
+
                 GameLogic.MatchingPair();
                 GameLogic.m_GameTurn++;
             }
+
             GameLogic.GameResult();
         }
     }
 }
-

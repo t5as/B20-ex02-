@@ -1,5 +1,4 @@
 ﻿using System;
-//delete
 
 namespace B20_Ex02
 {

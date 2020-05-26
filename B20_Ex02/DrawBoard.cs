@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-//delete
 
 namespace B20_Ex02
 {
@@ -68,6 +67,7 @@ namespace B20_Ex02
 
                     boardBorders.Append("========");
                 }
+                
                 Console.WriteLine(boardRecords);
                 Console.WriteLine(boardBorders);
             }

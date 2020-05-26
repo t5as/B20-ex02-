@@ -1,5 +1,4 @@
 ﻿using System;
-//delete
 
 namespace B20_Ex02
 {
@@ -11,7 +10,6 @@ namespace B20_Ex02
         public static string m_CurrentPlayerSecondMove;
         public static byte m_FirstPlayerScore = 0;
         public static byte m_SecondPlayerScore = 0;
-        public static bool m_HadSuccess = false;
         public static byte[] m_FirstCellPick;
         public static byte[] m_SecondCellPick;
 
@@ -109,7 +107,6 @@ namespace B20_Ex02
 
         public static void GameResult()
         {
-            // TODO add scores
             if (m_FirstPlayerScore > m_SecondPlayerScore)
             {
                 Console.WriteLine(string.Format(@"First player won: {0} - {1}", m_FirstPlayerScore, m_SecondPlayerScore));

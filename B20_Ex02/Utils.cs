@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-//delete
 
 namespace B20_Ex02
 {
     public class Utils
     {
-        private static string m_FirstPlayer;
-        private static string m_SecondPlayer;
-        private static byte m_GameType;
-        private static byte m_BoardHeight;
-        private static byte m_BoardWidth;
-        private static Dictionary<char, byte> m_LetterToIndex = new Dictionary<char, byte>()
+        private static string s_FirstPlayer;
+        private static string s_SecondPlayer;
+        private static byte s_GameType;
+        private static byte s_BoardHeight;
+        private static byte s_BoardWidth;
+        private static readonly Dictionary<char, byte> sr_LetterToIndex = new Dictionary<char, byte>()
         {
             { 'A', 0 },
             { 'B', 1 },
@@ -25,12 +24,12 @@ namespace B20_Ex02
         {
             get
             {
-                return m_FirstPlayer;
+                return s_FirstPlayer;
             }
             
             set
             {
-                m_FirstPlayer = value;
+                s_FirstPlayer = value;
             }
         }
 
@@ -38,12 +37,12 @@ namespace B20_Ex02
         {
             get
             {
-                return m_SecondPlayer;
+                return s_SecondPlayer;
             }
             
             set
             {
-                m_SecondPlayer = value;
+                s_SecondPlayer = value;
             }
         }
 
@@ -51,12 +50,12 @@ namespace B20_Ex02
         {
             get
             {
-                return m_GameType;
+                return s_GameType;
             }
             
             set
             {
-                m_GameType = value;
+                s_GameType = value;
             }
         }
 
@@ -64,12 +63,12 @@ namespace B20_Ex02
         {
             get
             {
-                return m_BoardHeight;
+                return s_BoardHeight;
             }
             
             set
             {
-                m_BoardHeight = value;
+                s_BoardHeight = value;
             }
         }
 
@@ -77,63 +76,55 @@ namespace B20_Ex02
         {
             get
             {
-                return m_BoardWidth;
+                return s_BoardWidth;
             }
             
             set
             {
-                m_BoardWidth = value;
+                s_BoardWidth = value;
             }
         } 
 
-        public static Dictionary<char, byte> LetterToIndex
-        {
-            get
-            {
-                return m_LetterToIndex;
-            }
-        }
-
         public static bool CharExistsInArray(char[] i_LettersArray, char i_Letter)
         {
-            bool charExistsInArray = true;
+            const bool k_CharExistsInArray = true;
             
             if(Array.IndexOf(i_LettersArray, i_Letter) == -1)
             {
-                return !charExistsInArray;
+                return !k_CharExistsInArray;
             }
 
-            return charExistsInArray;
+            return k_CharExistsInArray;
         } 
 
         public static bool CharExistsInMatrix(char[,] i_LettersMatrix, char i_Letter)
         {
-            bool charExistsInMatrix = true;
+            const bool k_CharExistsInMatrix = true;
 
-            for (int i = 0; i < m_BoardHeight; i++)
+            for (int i = 0; i < s_BoardHeight; i++)
             {
-                for(int j = 0; j < m_BoardWidth; j++)
+                for(int j = 0; j < s_BoardWidth; j++)
                 {
                     if(i_LettersMatrix[i, j] == i_Letter)
                     {
-                        return charExistsInMatrix;
+                        return k_CharExistsInMatrix;
                     }
                 }
             }
 
-            return !charExistsInMatrix;
+            return !k_CharExistsInMatrix;
         }
 
         public static bool cellIsTaken(byte i_RowIndex, byte i_ColIndex)
         {
-            bool cellIsTaken = true;
+            const bool k_CellIsTaken = true;
             
             if(GameDataMatrix.DisplayMatrix[i_RowIndex, i_ColIndex] != ' ')
             {
-                return cellIsTaken;
+                return k_CellIsTaken;
             }
 
-            return !cellIsTaken;
+            return !k_CellIsTaken;
         }
     } 
 }
