@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+//delete
 
 namespace B20_Ex02
 {

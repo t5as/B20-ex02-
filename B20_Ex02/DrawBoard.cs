@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+//delete
 
 namespace B20_Ex02
 {
