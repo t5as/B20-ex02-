@@ -6,41 +6,41 @@ namespace B20_Ex02
 {
     public class GameDataMatrix
     {
-        private byte m_rowsCount;
-        private byte m_columnsCount;
-        private static char[,] m_dataMatrix;
-        private static char[,] m_displayMatrix;
-        private char[] m_randomLetters;
+        private static char[,] m_DataMatrix;
+        private static char[,] m_DisplayMatrix;
+        private byte m_RowsCount;
+        private byte m_ColumnsCount;
+        private char[] m_RandomLetters;
         private Random rand = new Random();
 
         public GameDataMatrix()
         {
-            m_rowsCount = Utils.boardHeight;
-            m_columnsCount = Utils.boardWidth;
-            m_dataMatrix = new char[m_rowsCount, m_columnsCount];
-            m_displayMatrix = new char[m_rowsCount, m_columnsCount];
-            m_randomLetters = new char[(m_rowsCount * m_columnsCount)];
+            m_RowsCount = Utils.BoardHeight;
+            m_ColumnsCount = Utils.BoardWidth;
+            m_DataMatrix = new char[m_RowsCount, m_ColumnsCount];
+            m_DisplayMatrix = new char[m_RowsCount, m_ColumnsCount];
+            m_RandomLetters = new char[(m_RowsCount * m_ColumnsCount)];
         }  
 
-        public static char[,] dataMatrix
+        public static char[,] DataMatrix
         {
             get
             {
-                return m_dataMatrix;
+                return m_DataMatrix;
             }
         } 
 
-        public static char[,] displayMatrix
+        public static char[,] DisplayMatrix
         {
             get
             {
-                return m_displayMatrix;
+                return m_DisplayMatrix;
             }
         } 
 
-        public static void setDisplayMatrix(byte i_rowIndex, byte i_colIndex, char i_value)
+        public static void SetDisplayMatrix(byte i_RowIndex, byte i_ColIndex, char i_Value)
         {
-            m_displayMatrix[i_rowIndex, i_colIndex] = i_value;
+            m_DisplayMatrix[i_RowIndex, i_ColIndex] = i_Value;
         }
 
         private char getRandomLetter()
@@ -50,49 +50,50 @@ namespace B20_Ex02
             return letters[indexChoice];
         } 
         
-     
-
         private void setRandomLettersArray()
         {
             char letter;
-            for (byte i = 0; i < m_randomLetters.Length / 2; i++)
+
+            for(byte i = 0; i < m_RandomLetters.Length / 2; i++)
             {
                 letter = getRandomLetter();
-                while (Utils.charExistsInArray(m_randomLetters,letter))
+
+                while(Utils.CharExistsInArray(m_RandomLetters, letter))
                 {
                     letter = getRandomLetter();
                 }
 
-                m_randomLetters[2 * i] = letter;
-                m_randomLetters[2 * i + 1] = letter;                
+                m_RandomLetters[2 * i] = letter;
+                m_RandomLetters[(2 * i) + 1] = letter;                
             }
         }
 
         private void shuffleLettersArray()
         {
-            int numberOfElements = m_randomLetters.Length; 
-            while (numberOfElements > 1)
+            int numberOfElements = m_RandomLetters.Length; 
+
+            while(numberOfElements > 1)
             {
                 int indexInArray = rand.Next(numberOfElements);
                 numberOfElements -= 1;
-                char arrayElementHolder = m_randomLetters[numberOfElements];
-                m_randomLetters[numberOfElements] = m_randomLetters[indexInArray];
-                m_randomLetters[indexInArray] = arrayElementHolder;
-
+                char arrayElementHolder = m_RandomLetters[numberOfElements];
+                m_RandomLetters[numberOfElements] = m_RandomLetters[indexInArray];
+                m_RandomLetters[indexInArray] = arrayElementHolder;
             }
         }
 
-        public void setMatrices()
+        public void SetMatrices()
         {
             setRandomLettersArray();
             shuffleLettersArray();
-            byte indexOfLettersArray = 0;            
-            for (byte i = 0; i < m_rowsCount; i++)
+            byte indexOfLettersArray = 0;   
+            
+            for(byte i = 0; i < m_RowsCount; i++)
             {
-                for(byte j = 0; j < m_columnsCount; j++)
+                for(byte j = 0; j < m_ColumnsCount; j++)
                 {
-                    m_dataMatrix[i, j] = m_randomLetters[indexOfLettersArray];                   
-                    m_displayMatrix[i, j] = ' ';
+                    m_DataMatrix[i, j] = m_RandomLetters[indexOfLettersArray];                   
+                    m_DisplayMatrix[i, j] = ' ';
                     indexOfLettersArray++;
                 }
             }

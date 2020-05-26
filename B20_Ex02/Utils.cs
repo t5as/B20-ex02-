@@ -6,122 +6,134 @@ namespace B20_Ex02
 {
     public class Utils
     {
-        private static string m_firstPlayer;
-        private static string m_secondPlayer;
-        private static byte m_gameType;
-        private static byte m_boardHeight;
-        private static byte m_boardWidth;
-        private static Dictionary<char, byte> m_letterToIndex = new Dictionary<char, byte>()
+        private static string m_FirstPlayer;
+        private static string m_SecondPlayer;
+        private static byte m_GameType;
+        private static byte m_BoardHeight;
+        private static byte m_BoardWidth;
+        private static Dictionary<char, byte> m_LetterToIndex = new Dictionary<char, byte>()
         {
-            {'A', 0},
-            {'B', 1},
-            {'C', 2},
-            {'D', 3},
-            {'E', 4},
-            {'F', 5}
+            { 'A', 0 },
+            { 'B', 1 },
+            { 'C', 2 },
+            { 'D', 3 },
+            { 'E', 4 },
+            { 'F', 5 }
         };
 
-        public static string firstPlayer
+        public static string FirstPlayer
         {
             get
             {
-                return m_firstPlayer;
+                return m_FirstPlayer;
             }
+            
             set
             {
-                m_firstPlayer = value;
+                m_FirstPlayer = value;
             }
         }
 
-        public static string secondPlayer
+        public static string SecondPlayer
         {
             get
             {
-                return m_secondPlayer;
+                return m_SecondPlayer;
             }
+            
             set
             {
-                m_secondPlayer = value;
-            }
-        }
-        public static byte gameType
-        {
-            get
-            {
-                return m_gameType;
-            }
-            set
-            {
-                m_gameType = value;
+                m_SecondPlayer = value;
             }
         }
 
-        public static byte boardHeight
+        public static byte GameType
         {
             get
             {
-                return m_boardHeight;
+                return m_GameType;
             }
+            
             set
             {
-                m_boardHeight = value;
+                m_GameType = value;
             }
         }
 
-        public static byte boardWidth
+        public static byte BoardHeight
         {
             get
             {
-                return m_boardWidth;
+                return m_BoardHeight;
             }
+            
             set
             {
-                m_boardWidth = value;
+                m_BoardHeight = value;
+            }
+        }
+
+        public static byte BoardWidth
+        {
+            get
+            {
+                return m_BoardWidth;
+            }
+            
+            set
+            {
+                m_BoardWidth = value;
             }
         } 
 
-        public static Dictionary<char, byte> letterToIndex
+        public static Dictionary<char, byte> LetterToIndex
         {
             get
             {
-                return m_letterToIndex;
+                return m_LetterToIndex;
             }
         }
 
-        public static bool charExistsInArray(char[] i_lettersArray, char i_letter)
+        public static bool CharExistsInArray(char[] i_LettersArray, char i_Letter)
         {
-            if (Array.IndexOf(i_lettersArray, i_letter) == -1)
+            bool charExistsInArray = true;
+            
+            if(Array.IndexOf(i_LettersArray, i_Letter) == -1)
             {
-                return false;
+                return !charExistsInArray;
             }
-            else
-            {
-                return true;
-            }
+
+            return charExistsInArray;
         } 
 
-        public static bool charExistsInMatrix(char[,] i_lettersMatrix, char i_letter)
+        public static bool CharExistsInMatrix(char[,] i_LettersMatrix, char i_Letter)
         {
-            for(int i = 0; i < m_boardHeight; i++)
+            bool charExistsInMatrix = true;
+
+            for (int i = 0; i < m_BoardHeight; i++)
             {
-                for(int j = 0; j < m_boardWidth; j++)
+                for(int j = 0; j < m_BoardWidth; j++)
                 {
-                    if(i_lettersMatrix[i, j] == i_letter)
+                    if(i_LettersMatrix[i, j] == i_Letter)
                     {
-                        return true;
+                        return charExistsInMatrix;
                     }
                 }
             }
-            return false;
+
+            return !charExistsInMatrix;
         }
 
-        public static bool cellIsTaken(byte i_rowIndex, byte i_colIndex)
+        public static bool cellIsTaken(byte i_RowIndex, byte i_ColIndex)
         {
-            if (GameDataMatrix.displayMatrix[i_rowIndex, i_colIndex] != ' ')
+            bool cellIsTaken = true;
+            
+            if(GameDataMatrix.DisplayMatrix[i_RowIndex, i_ColIndex] != ' ')
             {
-                return true;
+                return cellIsTaken;
             }
-            return false;
+
+            return !cellIsTaken;
         }
     } 
 }

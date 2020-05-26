@@ -6,51 +6,55 @@ namespace B20_Ex02
 {
     public class Program
     { 
-        static void Main()
+        public static void Main()
         {
             UI ui = new UI();
             int answer = 1; 
+            
             while(answer == 1)
             {
                 ui.StartGame();
                 GameDataMatrix gdm = new GameDataMatrix();
-                gdm.setMatrices();
+                gdm.SetMatrices();
                 DrawBoard br = new DrawBoard();
-                DrawBoard.createBoard();
-                GameLogic.m_gameTurn = 0;
-                if (Utils.secondPlayer == "computer")
+                DrawBoard.CreateBoard();
+                GameLogic.m_GameTurn = 0;
+
+                if(Utils.SecondPlayer == "computer")
                 {
                     ComputerPlayer computerPlayer = new ComputerPlayer();
                 }
-                while (Utils.charExistsInMatrix(GameDataMatrix.displayMatrix, ' '))
-                {
-                    GameLogic.setCurrentPlayer();
-                    Console.WriteLine(GameLogic.m_currentPlayer);
 
-                    for (byte i = 0; i < 2; i++)
+                while(Utils.CharExistsInMatrix(GameDataMatrix.DisplayMatrix, ' '))
+                {
+                    GameLogic.SetCurrentPlayer();
+                    Console.WriteLine(GameLogic.m_CurrentPlayer);
+
+                    for(byte i = 0; i < 2; i++)
                     {
-                        string move = GameLogic.getNextMove(i);
-                        GameLogic.playerTurn(i, move);
-                        byte[] check = UI.moveToByteArray(move);
-                        br.updateBoard(check[0], check[1]);
+                        string move = GameLogic.GetNextMove(i);
+                        GameLogic.PlayerTurn(i, move);
+                        byte[] check = UI.MoveToByteArray(move);
+                        br.UpdateBoard(check[0], check[1]);
                     }
 
-                    GameLogic.matchingPair();
-                    GameLogic.m_gameTurn++;
-
+                    GameLogic.MatchingPair();
+                    GameLogic.m_GameTurn++;
                 }
-                GameLogic.gameResult();
-                answer = UI.startNewGame(); 
-                while (answer == -1)
+
+                GameLogic.GameResult();
+                answer = UI.StartNewGame();
+                
+                while(answer == -1)
                 {
-                    answer = UI.startNewGame();
+                    answer = UI.StartNewGame();
                 } 
-                if (answer == 0)
+
+                if(answer == 0)
                 {
                     Console.WriteLine("Until next time");
                 }
             }
-            
         }
     }
 }

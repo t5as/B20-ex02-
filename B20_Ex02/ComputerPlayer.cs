@@ -6,66 +6,66 @@ namespace B20_Ex02
 {
     public class ComputerPlayer
     {
-        private static List<string> m_availableCellsInBoard = new List<string>();
-        private static string m_firstGuess;
-        private static string m_secondGuess;
+        private static List<string> m_AvailableCellsInBoard = new List<string>();
+        private static string m_FirstGuess;
+        private static string m_SecondGuess;
 
         public ComputerPlayer()
         {
             char currentLetter = 'A'; 
-            for(byte i = 0; i < Utils.boardWidth; i++)
+
+            for(byte i = 0; i < Utils.BoardWidth; i++)
             {
-                for(byte j = 1; j <= Utils.boardHeight; j++)
+                for(byte j = 1; j <= Utils.BoardHeight; j++)
                 {
                     StringBuilder createCellPlace = new StringBuilder();
                     createCellPlace.Append(currentLetter);
                     createCellPlace.Append(j);
-                    m_availableCellsInBoard.Add(createCellPlace.ToString());
+                    m_AvailableCellsInBoard.Add(createCellPlace.ToString());
                 }
+
                 currentLetter++;
             }
         }  
 
-        public static string firstGuess
+        public static string FirstGuess
         {
             get
             {
-                m_firstGuess = getRandomCellsPlace();
-                Console.WriteLine("First: " + m_firstGuess);
-                return m_firstGuess;
+                m_FirstGuess = getRandomCellsPlace();
+                Console.WriteLine("First: " + m_FirstGuess);
+                return m_FirstGuess;
             }
         } 
 
-        public static string secondGuess
+        public static string SecondGuess
         {
             get
             {
-                m_secondGuess = getRandomCellsPlace();
-                Console.WriteLine("Second: " + m_secondGuess);                
-                return m_secondGuess;
+                m_SecondGuess = getRandomCellsPlace();
+                Console.WriteLine("Second: " + m_SecondGuess);                
+                return m_SecondGuess;
             }
         } 
 
-        public static void removeFromAvailableCellsInBoard(string i_locationInBoard)
+        public static void RemoveFromAvailableCellsInBoard(string i_LocationInBoard)
         {
-            m_availableCellsInBoard.Remove(i_locationInBoard);
+            m_AvailableCellsInBoard.Remove(i_LocationInBoard);
         }
 
         private static string getRandomCellsPlace()
         {
             Random rand = new Random();
-            int nodeIndex = rand.Next(m_availableCellsInBoard.Count); 
-            string randomLocation = m_availableCellsInBoard[nodeIndex];
-            m_availableCellsInBoard.Remove(randomLocation);
+            int nodeIndex = rand.Next(m_AvailableCellsInBoard.Count); 
+            string randomLocation = m_AvailableCellsInBoard[nodeIndex];
+            m_AvailableCellsInBoard.Remove(randomLocation);
             return randomLocation;
         } 
 
-        public static void reInsertValues()
+        public static void ReInsertValues()
         {
-            m_availableCellsInBoard.Add(m_firstGuess);
-            m_availableCellsInBoard.Add(m_secondGuess);
-        } 
-
-
+            m_AvailableCellsInBoard.Add(m_FirstGuess);
+            m_AvailableCellsInBoard.Add(m_SecondGuess);
+        }
     }
 }

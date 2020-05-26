@@ -6,37 +6,39 @@ namespace B20_Ex02
 {
     public class DrawBoard
     {
-        public static void createBoard()
+        public static void CreateBoard()
         {
             char columnLetter = 'A';
-            for (byte i = 0; i <= Utils.boardHeight; i++)
+
+            for(byte i = 0; i <= Utils.BoardHeight; i++)
             {
-                string rowNumber;
-                if (i == 0)
+                string rowNumber = i == 0 ? string.Format("       ", i) : string.Format("  {0}   |", i);
+                /*if (i == 0)
                 {
                     rowNumber = string.Format("       ", i);
                 }
                 else
                 {
                     rowNumber = string.Format("  {0}   |", i);
-                }
+                }*/
 
                 StringBuilder boardRecords = new StringBuilder(rowNumber);
                 StringBuilder boardBorders = new StringBuilder("      ");
-                for (byte j = 0; j < Utils.boardWidth; j++)
+
+                for(byte j = 0; j < Utils.BoardWidth; j++)
                 {
-                    if (i == 0)
+                    if(i == 0)
                     {
                         boardRecords.Append(string.Format("   {0}    ", columnLetter));
                         columnLetter++;
-                        boardBorders.Append("========");
                     }
                     else
                     {
-                        string cell = string.Format("   {0}   |", GameDataMatrix.displayMatrix[i - 1, j]);
+                        string cell = string.Format("   {0}   |", GameDataMatrix.DisplayMatrix[i - 1, j]);
                         boardRecords.Append(cell);
-                        boardBorders.Append("========");
                     }
+
+                    boardBorders.Append("========");
                 }
 
                 Console.WriteLine(boardRecords);
@@ -44,43 +46,48 @@ namespace B20_Ex02
             } 
         }
 
-        public void updateBoard(byte i_rowIndexLetter, byte i_colIndexLetter)
+        public void UpdateBoard(byte i_RowIndexLetter, byte i_ColIndexLetter)
         {
             char columnLetter = 'A';
-            for (byte i = 0; i <= Utils.boardHeight; i++)
+
+            for(byte i = 0; i <= Utils.BoardHeight; i++)
             {
-                string rowNumber;
-                if (i == 0)
+                string rowNumber = i == 0 ? string.Format("       ", i) : string.Format("  {0}   |", i);
+                /*if (i == 0)
                 {
                     rowNumber = string.Format("       ", i);
                 }
                 else
                 {
                     rowNumber = string.Format("  {0}   |", i);
-                }
+                }*/
 
                 StringBuilder boardRecords = new StringBuilder(rowNumber);
                 StringBuilder boardBorders = new StringBuilder("      ");
-                for (byte j = 0; j < Utils.boardWidth; j++)
+
+                for(byte j = 0; j < Utils.BoardWidth; j++)
                 {
-                    if (i == 0)
+                    if(i == 0)
                     {
                         boardRecords.Append(string.Format("   {0}    ", columnLetter));
                         columnLetter++;
-                        boardBorders.Append("========");
+                        //boardBorders.Append("========");
                     }
-                    else if(i == i_rowIndexLetter + 1 && j == i_colIndexLetter){
-                        GameDataMatrix.setDisplayMatrix((byte)(i - 1), j, GameDataMatrix.dataMatrix[i - 1, j]);
-                        string cell = string.Format("   {0}   |", GameDataMatrix.displayMatrix[i - 1, j]);
+                    else if(i == i_RowIndexLetter + 1 && j == i_ColIndexLetter) 
+                    {
+                        GameDataMatrix.SetDisplayMatrix((byte)(i - 1), j, GameDataMatrix.DataMatrix[i - 1, j]);
+                        string cell = string.Format("   {0}   |", GameDataMatrix.DisplayMatrix[i - 1, j]);
                         boardRecords.Append(cell);
-                        boardBorders.Append("========");
+                        //boardBorders.Append("========");
                     }
                     else
                     {
-                        string cell = string.Format("   {0}   |", GameDataMatrix.displayMatrix[i - 1, j]);
+                        string cell = string.Format("   {0}   |", GameDataMatrix.DisplayMatrix[i - 1, j]);
                         boardRecords.Append(cell);
-                        boardBorders.Append("========");
+                        //boardBorders.Append("========");
                     }
+
+                    boardBorders.Append("========");
                 }
 
                 Console.WriteLine(boardRecords);

@@ -6,128 +6,132 @@ namespace B20_Ex02
 {
     public class GameLogic
     { 
-        public static byte m_gameTurn;
-        public static string m_currentPlayer;
-        public static string m_currentPlayerFirstMove;
-        public static string m_currentPlayerSecondMove;
-        public static byte m_firstPlayerScore = 0;
-        public static byte m_secondPlayerScore = 0;
-        public static bool m_hadSuccess = false;
-        public static byte[] m_firstCellPick;
-        public static byte[] m_secondCellPick;
+        public static byte m_GameTurn;
+        public static string m_CurrentPlayer;
+        public static string m_CurrentPlayerFirstMove;
+        public static string m_CurrentPlayerSecondMove;
+        public static byte m_FirstPlayerScore = 0;
+        public static byte m_SecondPlayerScore = 0;
+        public static bool m_HadSuccess = false;
+        public static byte[] m_FirstCellPick;
+        public static byte[] m_SecondCellPick;
 
-
-
-        public static void setCurrentPlayer()
+        public static void SetCurrentPlayer()
         {
-            if (m_gameTurn % 2 == 0)
+            m_CurrentPlayer = m_GameTurn % 2 == 0 ? Utils.FirstPlayer : Utils.SecondPlayer;
+            /*if (m_GameTurn % 2 == 0)
             {
-               m_currentPlayer = Utils.firstPlayer;
+               m_CurrentPlayer = Utils.FirstPlayer;
             }
             else
             {
-                m_currentPlayer = Utils.secondPlayer;
-            }
+                m_CurrentPlayer = Utils.SecondPlayer;
+            }*/
         }
 
-        public static void deleteLastPlayerChoices()
+        public static void DeleteLastPlayerChoices()
         {
             System.Threading.Thread.Sleep(2000);
             Ex02.ConsoleUtils.Screen.Clear();
-            GameDataMatrix.setDisplayMatrix(m_firstCellPick[0], m_firstCellPick[1], ' ');
-            GameDataMatrix.setDisplayMatrix(m_secondCellPick[0], m_secondCellPick[1], ' ');
-            DrawBoard.createBoard();
+            GameDataMatrix.SetDisplayMatrix(m_FirstCellPick[0], m_FirstCellPick[1], ' ');
+            GameDataMatrix.SetDisplayMatrix(m_SecondCellPick[0], m_SecondCellPick[1], ' ');
+            DrawBoard.CreateBoard();
         }
         
-        public static void matchingPair()
+        public static void MatchingPair()
         {
-            if(GameDataMatrix.dataMatrix[m_firstCellPick[0], m_firstCellPick[1]] == GameDataMatrix.dataMatrix[m_secondCellPick[0], m_secondCellPick[1]])
+            if(GameDataMatrix.DataMatrix[m_FirstCellPick[0], m_FirstCellPick[1]] == GameDataMatrix.DataMatrix[m_SecondCellPick[0], m_SecondCellPick[1]])
             {
-                if(m_currentPlayer == Utils.firstPlayer)
+                if(m_CurrentPlayer == Utils.FirstPlayer)
                 {
-                    m_firstPlayerScore++;                   
-                    if(Utils.secondPlayer == "computer")
+                    m_FirstPlayerScore++;                   
+                    if(Utils.SecondPlayer == "computer")
                     {
-                        ComputerPlayer.removeFromAvailableCellsInBoard(m_currentPlayerFirstMove);
-                        ComputerPlayer.removeFromAvailableCellsInBoard(m_currentPlayerSecondMove);
+                        ComputerPlayer.RemoveFromAvailableCellsInBoard(m_CurrentPlayerFirstMove);
+                        ComputerPlayer.RemoveFromAvailableCellsInBoard(m_CurrentPlayerSecondMove);
                     }
                 }
                 else
                 {
-                    m_secondPlayerScore++;                    
+                    m_SecondPlayerScore++;                    
                 }
-                m_gameTurn--;
+
+                m_GameTurn--;
             }
             else
             {
-                deleteLastPlayerChoices();
-                if(Utils.secondPlayer == "computer" && GameLogic.m_currentPlayer == "computer")
+                DeleteLastPlayerChoices();
+                if(Utils.SecondPlayer == "computer" && GameLogic.m_CurrentPlayer == "computer")
                 {      
-                    ComputerPlayer.reInsertValues();
+                    ComputerPlayer.ReInsertValues();
                 }
             }
         } 
 
-        public static string guessNextMove( byte i_numberOfGuess)
+        public static string GuessNextMove(byte i_NumberOfGuess)
         {
-            if (GameLogic.m_currentPlayer == "computer")
+            if (GameLogic.m_CurrentPlayer == "computer")
             {                
-                if (i_numberOfGuess == 0)
+                return i_NumberOfGuess == 0 ? ComputerPlayer.FirstGuess : ComputerPlayer.SecondGuess;
+                /*if(i_numberOfGuess == 0)
                 {
-                    return ComputerPlayer.firstGuess;
+                    return ComputerPlayer.FirstGuess;
                 }
                 else
                 {
-                    return ComputerPlayer.secondGuess;
-                }
+                    return ComputerPlayer.SecondGuess;
+                }*/
             }
             else
             {
-                return UI.GetCurrentMove(GameLogic.m_currentPlayer);
+                return UI.GetCurrentMove(GameLogic.m_CurrentPlayer);
             }
         } 
 
-        public static string getNextMove(byte i_choiceNumber)
+        public static string GetNextMove(byte i_ChoiceNumber)
         {
-            string move = GameLogic.guessNextMove(i_choiceNumber);
+            string move = GameLogic.GuessNextMove(i_ChoiceNumber);
             bool moveValid = UI.IsValidMove(move);
+
             while (!moveValid)
             {
-                move = GameLogic.guessNextMove(i_choiceNumber);
+                move = GameLogic.GuessNextMove(i_ChoiceNumber);
                 moveValid = UI.IsValidMove(move);
             }
+
             return move;
         } 
         
-        public static void playerTurn(byte i_turn, string i_move)
+        public static void PlayerTurn(byte i_Turn, string i_Move)
         {
-            if (i_turn == 0)
+            if (i_Turn == 0)
             {
-                if (GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
+                if (GameLogic.m_CurrentPlayer == Utils.FirstPlayer && Utils.SecondPlayer == "computer")
                 {
-                    GameLogic.m_currentPlayerFirstMove = i_move;
+                    GameLogic.m_CurrentPlayerFirstMove = i_Move;
                 }
 
-                GameLogic.m_firstCellPick = UI.moveToByteArray(i_move);
+                GameLogic.m_FirstCellPick = UI.MoveToByteArray(i_Move);
             }
             else
             {
-                if (GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
+                if (GameLogic.m_CurrentPlayer == Utils.FirstPlayer && Utils.SecondPlayer == "computer")
                 {
-                    GameLogic.m_currentPlayerSecondMove = i_move;
+                    GameLogic.m_CurrentPlayerSecondMove = i_Move;
                 }
 
-                GameLogic.m_secondCellPick = UI.moveToByteArray(i_move);
+                GameLogic.m_SecondCellPick = UI.MoveToByteArray(i_Move);
             }            
         }
 
-        public static void gameResult()
+        public static void GameResult()
         {
-            if (m_firstPlayerScore > m_secondPlayerScore)
+            // TODO add scores
+            if (m_FirstPlayerScore > m_SecondPlayerScore)
             {
                 Console.WriteLine("First player won");
             }
-            else if (m_firstPlayerScore < m_secondPlayerScore)
+            else if (m_FirstPlayerScore < m_SecondPlayerScore)
             {
                 Console.WriteLine("Second player won");
             }
@@ -136,9 +140,5 @@ namespace B20_Ex02
                 Console.WriteLine("Draw");
             }
         }
-
-
-    } 
-
-    
+    }
 }
