@@ -30,26 +30,7 @@ namespace B20_Ex02
                     for (byte i = 0; i < 2; i++)
                     {
                         string move = GameLogic.getNextMove(i);
-
-                        if (i == 0)
-                        {
-                            if (GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
-                            {
-                                GameLogic.m_currentPlayerFirstMove = move;
-                            }
-
-                            GameLogic.m_firstCellPick = UI.moveToByteArray(move);
-                        }
-                        else
-                        {
-                            if (GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
-                            {
-                                GameLogic.m_currentPlayerSecondMove = move;
-                            }
-
-                            GameLogic.m_secondCellPick = UI.moveToByteArray(move);
-                        }
-
+                        GameLogic.playerTurn(i, move);
                         byte[] check = UI.moveToByteArray(move);
                         br.updateBoard(check[0], check[1]);
                     }

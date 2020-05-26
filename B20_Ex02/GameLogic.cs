@@ -98,6 +98,28 @@ namespace B20_Ex02
             }
             return move;
         } 
+        
+        public static void playerTurn(byte i_turn, string i_move)
+        {
+            if (i_turn == 0)
+            {
+                if (GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
+                {
+                    GameLogic.m_currentPlayerFirstMove = i_move;
+                }
+
+                GameLogic.m_firstCellPick = UI.moveToByteArray(i_move);
+            }
+            else
+            {
+                if (GameLogic.m_currentPlayer == Utils.firstPlayer && Utils.secondPlayer == "computer")
+                {
+                    GameLogic.m_currentPlayerSecondMove = i_move;
+                }
+
+                GameLogic.m_secondCellPick = UI.moveToByteArray(i_move);
+            }            
+        }
 
         public static void gameResult()
         {
