@@ -19,6 +19,7 @@ namespace B20_Ex02
             m_DataMatrix = new char[m_RowsCount, m_ColumnsCount];
             m_DisplayMatrix = new char[m_RowsCount, m_ColumnsCount];
             m_RandomLetters = new char[(m_RowsCount * m_ColumnsCount)];
+            SetMatrices();
         }  
 
         public static char[,] DataMatrix

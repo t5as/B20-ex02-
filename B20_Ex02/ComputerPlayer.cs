@@ -35,6 +35,7 @@ namespace B20_Ex02
             {
                 m_FirstGuess = getRandomCellsPlace();
                 Console.WriteLine("First: " + m_FirstGuess);
+                System.Threading.Thread.Sleep(1500);
                 return m_FirstGuess;
             }
         } 
@@ -44,7 +45,8 @@ namespace B20_Ex02
             get
             {
                 m_SecondGuess = getRandomCellsPlace();
-                Console.WriteLine("Second: " + m_SecondGuess);                
+                Console.WriteLine("Second: " + m_SecondGuess);
+                System.Threading.Thread.Sleep(1500);
                 return m_SecondGuess;
             }
         } 

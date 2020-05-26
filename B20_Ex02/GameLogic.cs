@@ -17,15 +17,7 @@ namespace B20_Ex02
 
         public static void SetCurrentPlayer()
         {
-            m_CurrentPlayer = m_GameTurn % 2 == 0 ? Utils.FirstPlayer : Utils.SecondPlayer;
-            /*if (m_GameTurn % 2 == 0)
-            {
-               m_CurrentPlayer = Utils.FirstPlayer;
-            }
-            else
-            {
-                m_CurrentPlayer = Utils.SecondPlayer;
-            }*/
+            m_CurrentPlayer = m_GameTurn % 2 == 0 ? Utils.FirstPlayer : Utils.SecondPlayer;         
         }
 
         public static void DeleteLastPlayerChoices()
@@ -71,15 +63,7 @@ namespace B20_Ex02
         {
             if (GameLogic.m_CurrentPlayer == "computer")
             {                
-                return i_NumberOfGuess == 0 ? ComputerPlayer.FirstGuess : ComputerPlayer.SecondGuess;
-                /*if(i_numberOfGuess == 0)
-                {
-                    return ComputerPlayer.FirstGuess;
-                }
-                else
-                {
-                    return ComputerPlayer.SecondGuess;
-                }*/
+                return i_NumberOfGuess == 0 ? ComputerPlayer.FirstGuess : ComputerPlayer.SecondGuess;             
             }
             else
             {
@@ -128,15 +112,15 @@ namespace B20_Ex02
             // TODO add scores
             if (m_FirstPlayerScore > m_SecondPlayerScore)
             {
-                Console.WriteLine("First player won");
+                Console.WriteLine(string.Format(@"First player won: {0} - {1}", m_FirstPlayerScore, m_SecondPlayerScore));
             }
             else if (m_FirstPlayerScore < m_SecondPlayerScore)
             {
-                Console.WriteLine("Second player won");
+                Console.WriteLine(string.Format(@"Second player won: {0} - {1}", m_FirstPlayerScore, m_SecondPlayerScore));
             }
             else
             {
-                Console.WriteLine("Draw");
+                Console.WriteLine(string.Format(@"Draw, no winner: {0} - {1}", m_FirstPlayerScore, m_SecondPlayerScore));
             }
         }
     }

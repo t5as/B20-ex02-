@@ -4,26 +4,13 @@
 namespace B20_Ex02
 {
     public class UI
-    {
-       public UI()
-        {
-        }
-
-        public void StartGame()
+    {    
+        public static void StartGame()
         {
             Utils.FirstPlayer = InitializePlayer("first player");
             Utils.GameType = InitializeGameType();
 
-            Utils.SecondPlayer = Utils.GameType == 2 ? InitializePlayer("second player") : "computer";
-            /*if (Utils.GameType == 2)
-            {
-                Utils.SecondPlayer = InitializePlayer("second player");
-            }
-            else
-            {
-                Utils.SecondPlayer = "computer";
-            }*/
-
+            Utils.SecondPlayer = Utils.GameType == 2 ? InitializePlayer("second player") : "computer";         
             InitializeBoardDimensions();
         }
 
@@ -272,9 +259,7 @@ If you wish to play against a second player - press 2", Utils.FirstPlayer));
 
         public static byte[] MoveToByteArray(string i_Move)
         {
-            int index = (int)i_Move[0] % 32 - 1;
-            // Console.WriteLine(index);
-            // Console.WriteLine(Utils.LetterToIndex[char.ToUpper(i_Move[0])]);
+            int index = (int)i_Move[0] % 32 - 1;          
             byte[] move = { (byte)(int.Parse(i_Move[1].ToString()) - 1), (byte)(index) };
             return move;
         }

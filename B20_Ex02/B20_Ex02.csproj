@@ -36,6 +36,7 @@
     <Compile Include="DrawBoard.cs" />
     <Compile Include="GameDataMatrix.cs" />
     <Compile Include="GameLogic.cs" />
+    <Compile Include="RunGame.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Utils.cs" />
