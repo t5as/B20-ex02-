@@ -272,8 +272,8 @@ If you wish to play against a second player - press 2", Utils.FirstPlayer));
         public static byte[] MoveToByteArray(string i_Move)
         {
             int index = (int)i_Move[0] % 32 - 1;
-            //Console.WriteLine(index);
-            //Console.WriteLine(Utils.LetterToIndex[char.ToUpper(i_Move[0])]);
+            // Console.WriteLine(index);
+            // Console.WriteLine(Utils.LetterToIndex[char.ToUpper(i_Move[0])]);
             byte[] move = { (byte)(int.Parse(i_Move[1].ToString()) - 1), (byte)(index) };
             return move;
         }
